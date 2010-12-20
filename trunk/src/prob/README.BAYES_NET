@@ -8,7 +8,7 @@ FOR USERS: Bayes Net Inference Interface
 
 o To run the text interface to the system **from the 'prob' directory**:
 
-    UNIX:    Type 'run prob.PShell' from 'prob' directory.
+    UNIX:    Type './run prob.PShell' from 'prob' directory.
     WINDOWS: Type 'CMD /C run.bat prob.PShell' from 'prob' directory.
 
     Type 'help' from within the shell for information on commands.
@@ -28,11 +28,16 @@ o The easiest way to familiarize yourself with how to load the Bayes Net
   these scripts type 'exec script-name' from within PSHell, or specify
   them when PSHell is invoked:
 
-   o alarm_test.psh   
-   o big_noisy_max.psh  
-   o test.psh
-   o barley_test.psh  
-   o med_noisy_max.psh
+    o alarm_test.psh   
+    o big_noisy_max.psh  
+    o test.psh
+    o barley_test.psh  
+    o med_noisy_max.psh
+
+  To execute these scripts, just append them as the first argument
+  to prob.PShell, e.g.,
+
+    ./run prob.PShell alarm_test.psh 
 
 o For the tabular CPT representation one can set the DD_TYPE 
   environmental variable to TABLE (enumerated tabular representation),
