@@ -27,7 +27,6 @@ import java.util.*;
 
 // DD & FBR interfaces
 import logic.add.*;
-import mdp.rtdp.Racetrack;
 
 /**
  * Main MDP inference class
