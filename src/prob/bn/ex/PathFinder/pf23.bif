@@ -1,0 +1,948 @@
+// Bayesian network
+network "BayesianNetwork" { // 135 variables and 135 probability distributions
+}
+variable  "Fault" { // 1 values
+	type discrete[1] {  "AIDS early" };
+	property "position = (-440, -473)" ;
+}
+variable  "ACID" { // 2 values
+	type discrete[2] {  "Negative"  "Positive" };
+	property "position = (-418, -472)" ;
+}
+variable  "F_CSA" { // 3 values
+	type discrete[3] {  "No follicles"  "Absent"  "Present" };
+	property "position = (-457, -470)" ;
+}
+variable  "F_ISL" { // 3 values
+	type discrete[3] {  "No follicles"  "Absent"  "Present" };
+	property "position = (-458, -464)" ;
+}
+variable  "F_POL" { // 3 values
+	type discrete[3] {  "No follicles"  "Absent"  "Present" };
+	property "position = (-446, -467)" ;
+}
+variable  "F_RPBV" { // 4 values
+	type discrete[4] {  "No follicles"  "None"  "One"  "More than one" };
+	property "position = (-458, -468)" ;
+}
+variable  "BH_LANG" { // 4 values
+	type discrete[4] {  "Absent"  "Slight"  "Moderate"  "Marked" };
+	property "position = (-409, -449)" ;
+}
+variable  "BH_FOAM" { // 5 values
+	type discrete[5] {  "Absent"  "Rare"  "Focal"  "Multifocal"  "Extensive" };
+	property "position = (-409, -453)" ;
+}
+variable  "BH_NOS" { // 3 values
+	type discrete[3] {  "Absent to slight (<5%)"  "Moderate (5-50%)"  "Marked (>50%)" };
+	property "position = (-408, -448)" ;
+}
+variable  "BH_SS" { // 5 values
+	type discrete[5] {  "Absent"  "Rare"  "Focal SS pattern"  "Multifocal SS pattern"  "Extensive SS pattern" };
+	property "position = (-409, -451)" ;
+}
+variable  "CA" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-452, -443)" ;
+}
+variable  "SR" { // 5 values
+	type discrete[5] {  "Absent (0)"  "Rare (1-3)"  "Present (4-15)"  "Many (16-50)"  "Striking (>50)" };
+	property "position = (-437, -452)" ;
+}
+variable  "DVS" { // 2 values
+	type discrete[2] {  "Absent"  "Present (yes)" };
+	property "position = (-455, -448)" ;
+}
+variable  "EMPERI" { // 3 values
+	type discrete[3] {  "Absent (0)"  "Present (1-2)"  "Prominent (>2)" };
+	property "position = (-421, -455)" ;
+}
+variable  "MA_EOSIN" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-433, -444)" ;
+}
+variable  "EMM" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-431, -450)" ;
+}
+variable  "EOSIN" { // 3 values
+	type discrete[3] {  "Absent"  "Present"  "Prominent" };
+	property "position = (-430, -453)" ;
+}
+variable  "EHC" { // 3 values
+	type discrete[3] {  "Absent (0%)"  "Present (<5%)"  "Prominent (>5%)" };
+	property "position = (-441, -460)" ;
+}
+variable  "EHC_ENC" { // 4 values
+	type discrete[4] {  "No epithelial clusters/no follicles"  "Absent (no)"  "Some"  "Many" };
+	property "position = (-448, -461)" ;
+}
+variable  "EH_NC" { // 3 values
+	type discrete[3] {  "Absent (0%)"  "Present (<5%)"  "Prominent (>5%)" };
+	property "position = (-426, -454)" ;
+}
+variable  "ECCC" { // 4 values
+	type discrete[4] {  "Absent (0%)"  "Rare (1-10%)"  "Present (11-50%)"  "Many (51-70%)" };
+	property "position = (-421, -471)" ;
+}
+variable  "FCB" { // 3 values
+	type discrete[3] {  "Absent"  "Present"  "Prominent" };
+	property "position = (-458, -450)" ;
+}
+variable  "FCB_NOD" { // 3 values
+	type discrete[3] {  "No collagenous bands"  "Absent"  "Present" };
+	property "position = (-458, -453)" ;
+}
+variable  "FIBROS" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-453, -452)" ;
+}
+variable  "FITE" { // 2 values
+	type discrete[2] {  "Negative"  "Positive" };
+	property "position = (-413, -472)" ;
+}
+variable  "FBODY" { // 3 values
+	type discrete[3] {  "Absent (0)"  "Present (1-5)"  "Prominent (>5)" };
+	property "position = (-446, -452)" ;
+}
+variable  "GENE_TC" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-427, -443)" ;
+}
+variable  "HAIRY" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-458, -446)" ;
+}
+variable  "HTLV_I" { // 2 values
+	type discrete[2] {  "Negative"  "Positive" };
+	property "position = (-413, -471)" ;
+}
+variable  "HIV" { // 2 values
+	type discrete[2] {  "Negative"  "Positive" };
+	property "position = (-433, -472)" ;
+}
+variable  "INTFOL" { // 3 values
+	type discrete[3] {  "No expansion"  "Mild-moderate expansion"  "Unif mrkd expan/no follicles" };
+	property "position = (-447, -472)" ;
+}
+variable  "ICLC" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-430, -471)" ;
+}
+variable  "KARYO" { // 3 values
+	type discrete[3] {  "Absent"  "Present"  "Prominent" };
+	property "position = (-416, -457)" ;
+}
+variable  "L_and_H" { // 5 values
+	type discrete[5] {  "Absent (0)"  "Rare (1-5)"  "Few (6-25)"  "Many (26-100)"  "Striking (>100)" };
+	property "position = (-444, -456)" ;
+}
+variable  "LH_NOD" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-442, -459)" ;
+}
+variable  "LACUN" { // 6 values
+	type discrete[6] {  "Absent (0)"  "Rare (1-5)"  "Few (6-25)"  "Many (26 - 100)"  "Striking (>100)"  "Sheets (>50% of section)" };
+	property "position = (-443, -455)" ;
+}
+variable  "LANG" { // 3 values
+	type discrete[3] {  "Absent (0)"  "Present (1-5)"  "Prominent (>5)" };
+	property "position = (-443, -449)" ;
+}
+variable  "LEUK" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-453, -445)" ;
+}
+variable  "LLC_CY" { // 4 values
+	type discrete[4] {  "No LLCs"  "Scanty"  "Moderate-abundant clear"  "Moderate-abundant deep" };
+	property "position = (-420, -463)" ;
+}
+variable  "LLC_NS" { // 6 values
+	type discrete[6] {  "No LLCs"  "Multilobated (some)"  "Cerebriform/Mulberry (some)"  "Convoluted (some)"  "Irregular (most)"  "Round/slightly irregular (most)" };
+	property "position = (-410, -464)" ;
+}
+variable  "LLC" { // 5 values
+	type discrete[5] {  "Absent (0%)"  "Sparse (<10%)"  "Moderate (11-50%)"  "Numerous (51-90%)"  "Striking (>90%)" };
+	property "position = (-414, -461)" ;
+}
+variable  "F_POPU" { // 5 values
+	type discrete[5] {  "No follicles"  ">80% 6-12u"  ">50% 13-20u with nucleoli"  ">50% >20u with nucleoli"  "Other" };
+	property "position = (-446, -462)" ;
+}
+variable  "MAST" { // 3 values
+	type discrete[3] {  "Absent (0)"  "Present (1-50)"  "Prominent (>50)" };
+	property "position = (-441, -447)" ;
+}
+variable  "MLC" { // 5 values
+	type discrete[5] {  "Absent (0%)"  "Sparse (<10%)"  "Moderate (11-50%)"  "Numerous (51-90%)"  "Striking (>90%)" };
+	property "position = (-429, -460)" ;
+}
+variable  "MELANOMA" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-452, -444)" ;
+}
+variable  "MF10HP" { // 4 values
+	type discrete[4] {  "0-5"  "6-15"  "16-50"  ">50" };
+	property "position = (-439, -442)" ;
+}
+variable  "MLC_CY" { // 4 values
+	type discrete[4] {  "No MLCs"  "Scanty"  "Moderate-abundant clear"  "Moderate-abundant deep" };
+	property "position = (-427, -468)" ;
+}
+variable  "MLC_NS" { // 5 values
+	type discrete[5] {  "No MLCs"  "Cerebriform (some)"  "Convoluted (some)"  "Irregular (most)"  "Round/slightly irregular (most)" };
+	property "position = (-426, -462)" ;
+}
+variable  "MLC_NI" { // 5 values
+	type discrete[5] {  "No MLCs"  "Absent to rare"  "Large central"  "Peripheral"  "Other" };
+	property "position = (-426, -466)" ;
+}
+variable  "MCC" { // 4 values
+	type discrete[4] {  "Absent (0%)"  "Present (<5%)"  "Prominent (5-50%)"  "Confluence (>50%)" };
+	property "position = (-434, -451)" ;
+}
+variable  "MONO" { // 4 values
+	type discrete[4] {  "Absent (0)"  "Rare (1-2)"  "Present (3-20)"  "Many (>20)" };
+	property "position = (-437, -449)" ;
+}
+variable  "MOT_HIST" { // 4 values
+	type discrete[4] {  "Absent"  "Focal (nonextensive)"  "Multifocal (nonextensive)"  "Extensive" };
+	property "position = (-415, -455)" ;
+}
+variable  "MOT_LLC" { // 4 values
+	type discrete[4] {  "No mottling"  "Focal (nonextensive)"  "Multifocal (nonextensive)"  "Extensive" };
+	property "position = (-423, -461)" ;
+}
+variable  "MUMMY" { // 4 values
+	type discrete[4] {  "Absent (0)"  "Rare (1-2)"  "Present (3-20)"  "Many (>20)" };
+	property "position = (-441, -451)" ;
+}
+variable  "NECR" { // 4 values
+	type discrete[4] {  "Absent"  "Focal (nonextensive)"  "Multifocal (nonextensive)"  "Extensive" };
+	property "position = (-420, -457)" ;
+}
+variable  "MA_NEUT" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-431, -447)" ;
+}
+variable  "NEUTRO" { // 3 values
+	type discrete[3] {  "Absent"  "Present"  "Prominent" };
+	property "position = (-429, -445)" ;
+}
+variable  "PAS" { // 2 values
+	type discrete[2] {  "No"  "Yes" };
+	property "position = (-414, -474)" ;
+}
+variable  "PI" { // 3 values
+	type discrete[3] {  "Absent"  "Present"  "Prominent" };
+	property "position = (-457, -472)" ;
+}
+variable  "PLASMA" { // 6 values
+	type discrete[6] {  "Absent (0%)"  "Few (<5%)"  "Moderate (6-20%)"  "Marked (21-50%)"  "Striking (51-90%)"  "Sheets (>90%)" };
+	property "position = (-426, -452)" ;
+}
+variable  "PC_TP" { // 6 values
+	type discrete[6] {  "No plasma cells"  "Mature"  "Immature"  "Blastic"  "Pleomorphic"  "Mixed" };
+	property "position = (-427, -449)" ;
+}
+variable  "PLEO" { // 5 values
+	type discrete[5] {  "Absent (0)"  "Rare (1-5)"  "Few (6-25)"  "Many (26-100)"  "Striking (>100)" };
+	property "position = (-457, -456)" ;
+}
+variable  "PFP" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-449, -475)" ;
+}
+variable  "PTGC_NOD" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-458, -474)" ;
+}
+variable  "RD_BOD" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-420, -451)" ;
+}
+variable  "SARCOMA" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-448, -445)" ;
+}
+variable  "SCHAUM" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-458, -444)" ;
+}
+variable  "S_RING" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-458, -443)" ;
+}
+variable  "SLC_CY" { // 4 values
+	type discrete[4] {  "No SLCs"  "Scanty"  "Moderate-abundant clear"  "Moderate-abundant deep" };
+	property "position = (-441, -464)" ;
+}
+variable  "SLC_NS" { // 5 values
+	type discrete[5] {  "No SLCs"  "Cerebriform (some)"  "Convoluted (some)"  "Moderate-mark irregular (most)"  "Round/slightly irregular (most)" };
+	property "position = (-435, -464)" ;
+}
+variable  "SLC" { // 5 values
+	type discrete[5] {  "Absent (0%)"  "Sparse (1-10%)"  "Moderate (11-50%)"  "Numerous (51-90%)"  "Striking (>90%)" };
+	property "position = (-438, -462)" ;
+}
+variable  "SINUSES" { // 4 values
+	type discrete[4] {  "Distended"  "Patent"  "Part-greatly obliterated"  "Completely obliterated" };
+	property "position = (-452, -473)" ;
+}
+variable  "VASC_C" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-450, -451)" ;
+}
+variable  "VASC_NS" { // 5 values
+	type discrete[5] {  "Absent"  "Slight"  "Moderate"  "Marked"  "Pronounced" };
+	property "position = (-451, -449)" ;
+}
+variable  "VASC_S" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-448, -448)" ;
+}
+variable  "F_HEM" { // 3 values
+	type discrete[3] {  "No follicles"  "Absent"  "Present" };
+	property "position = (-458, -466)" ;
+}
+variable  "TAB" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-427, -440)" ;
+}
+variable  "CT" { // 4 values
+	type discrete[4] {  "Absent"  "Slight (<10)"  "Moderate (10-20)"  "Marked (>20)" };
+	property "position = (-454, -454)" ;
+}
+variable  "GENE_IG" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-427, -441)" ;
+}
+variable  "HIV_ST" { // 3 values
+	type discrete[3] {  "Negative"  "Positive/Asymptomatic"  "Positive/Symptomatic" };
+	property "position = (-429, -474)" ;
+}
+variable  "MLC_LLC" { // 2 values
+	type discrete[2] {  "No"  "Yes" };
+	property "position = (-430, -458)" ;
+}
+variable  "LLC_NI" { // 5 values
+	type discrete[5] {  "No LLCs"  "Absent to rare"  "Large central"  "Peripheral"  "Other" };
+	property "position = (-421, -467)" ;
+}
+variable  "SLC_CS" { // 5 values
+	type discrete[5] {  "No SLCs"  "Clumped"  "Vesicular"  "Fine and delicate"  "Plasmacytoid" };
+	property "position = (-438, -465)" ;
+}
+variable  "LLC_ID" { // 4 values
+	type discrete[4] {  "No LLCs"  "Other"  "Large cleaved"  "Large noncleaved" };
+	property "position = (-416, -465)" ;
+}
+variable  "FOLLICLE" { // 5 values
+	type discrete[5] {  "Absent (0%)"  "1-25%"  "25-75%"  "75-90%"  ">90%" };
+	property "position = (-452, -466)" ;
+}
+variable  "F_DEN" { // 5 values
+	type discrete[5] {  "No follicles"  "Back to back"  "Closely packed"  "Separated"  "Far apart" };
+	property "position = (-454, -471)" ;
+}
+variable  "F_SS" { // 5 values
+	type discrete[5] {  "No follicles"  "Absent (0)"  "Slight (1-15)"  "Moderate (16-30)"  "Marked (>30)" };
+	property "position = (-441, -467)" ;
+}
+variable  "F_MZSTAT" { // 5 values
+	type discrete[5] {  "No follicles/no mantle zones"  "Mantle zones absent in most follicles"  "Most incompletely surround follicles"  "Most completely surround fol, not thick"  "Most thick (>10 lymphocytes)" };
+	property "position = (-458, -461)" ;
+}
+variable  "F_MZCM" { // 3 values
+	type discrete[3] {  "No follicles/no mantle zones"  "Absent"  "Present" };
+	property "position = (-456, -459)" ;
+}
+variable  "F_DEF" { // 4 values
+	type discrete[4] {  "No follicles"  "Almost all well defined"  "Both well and poor defined"  "Almost all poor defined" };
+	property "position = (-458, -462)" ;
+}
+variable  "F_MITO" { // 4 values
+	type discrete[4] {  "No follicles"  "0-20"  "21-50"  ">50" };
+	property "position = (-444, -465)" ;
+}
+variable  "F_MZ" { // 3 values
+	type discrete[3] {  "No follicles"  "Absent"  "Present" };
+	property "position = (-453, -463)" ;
+}
+variable  "F_CIO" { // 4 values
+	type discrete[4] {  "No follicles"  "Most similar"  "Some similar"  "None similar" };
+	property "position = (-446, -464)" ;
+}
+variable  "LLC_KL" { // 4 values
+	type discrete[4] {  "No LLCs"  "Neither positive"  "Monoclonal"  "Polyclonal" };
+	property "position = (-409, -462)" ;
+}
+variable  "PLAS_KL" { // 4 values
+	type discrete[4] {  "No plasma cells"  "Polyclonal"  "Monoclonal"  "Neither positive" };
+	property "position = (-422, -449)" ;
+}
+variable  "FCC_KL" { // 4 values
+	type discrete[4] {  "No follicles"  "Polyclonal"  "Monoclonal"  "Neither positive" };
+	property "position = (-445, -470)" ;
+}
+variable  "MZL_KL" { // 4 values
+	type discrete[4] {  "No mantle zones"  "Polyclonal"  "Monoclonal"  "Neither positive" };
+	property "position = (-453, -458)" ;
+}
+variable  "SR_LEU" { // 5 values
+	type discrete[5] {  "No classic SRs"  "Both -"  "Leu-M1+ CLA-"  "Leu-M1- CLA+"  "Both +" };
+	property "position = (-434, -455)" ;
+}
+variable  "LAC_LEU" { // 5 values
+	type discrete[5] {  "No Lacunar SRs"  "Both -"  "Leu-M1+ CLA-"  "Leu-M1- CLA+"  "Both+" };
+	property "position = (-438, -457)" ;
+}
+variable  "PLEO_LEU" { // 5 values
+	type discrete[5] {  "No pleomorphic SRs"  "Both -"  "Leu-M1+ CLA-"  "Leu-M1- CLA+"  "Both +" };
+	property "position = (-450, -456)" ;
+}
+variable  "MONO_LEU" { // 5 values
+	type discrete[5] {  "No mononuclear SRs"  "Both -"  "Leu-M1+ CLA-"  "Leu-M1- CLA+"  "Both +" };
+	property "position = (-438, -445)" ;
+}
+variable  "LH_LEU" { // 5 values
+	type discrete[5] {  "No L&H SRs"  "Both -"  "Leu-M1+ CLA-"  "Leu-M1- CLA+"  "Both +" };
+	property "position = (-447, -453)" ;
+}
+variable  "CA_KER" { // 2 values
+	type discrete[2] {  "Negative"  "Positive" };
+	property "position = (-452, -441)" ;
+}
+variable  "MLC_LEU9" { // 3 values
+	type discrete[3] {  "No MLCs"  "Negative"  "Positive" };
+	property "position = (-432, -464)" ;
+}
+variable  "MLC_TDT" { // 3 values
+	type discrete[3] {  "No MLCs"  "Negative"  "Positive" };
+	property "position = (-432, -466)" ;
+}
+variable  "CA_CHROM" { // 2 values
+	type discrete[2] {  "Negative"  "Positive" };
+	property "position = (-451, -440)" ;
+}
+variable  "UCHL_1" { // 2 values
+	type discrete[2] {  "Negative"  "Positive" };
+	property "position = (-442, -437)" ;
+}
+variable  "KI_AB" { // 2 values
+	type discrete[2] {  "Negative"  "Positive" };
+	property "position = (-432, -438)" ;
+}
+variable  "L_26" { // 2 values
+	type discrete[2] {  "Negative"  "Positive" };
+	property "position = (-446, -436)" ;
+}
+variable  "BER_H2" { // 2 values
+	type discrete[2] {  "Negative"  "Positive" };
+	property "position = (-437, -437)" ;
+}
+variable  "SEMINOMA" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-448, -443)" ;
+}
+variable  "AGE" { // 4 values
+	type discrete[4] {  "0-20"  "21-30"  "31-70"  ">70" };
+	property "position = (-435, -475)" ;
+}
+variable  "LYMPHADE" { // 2 values
+	type discrete[2] {  "Localized (stage 1 or 2)"  "Generalized (stage 3 or 4)" };
+	property "position = (-444, -475)" ;
+}
+variable  "MED_MASS" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-439, -475)" ;
+}
+variable  "HMB45" { // 2 values
+	type discrete[2] {  "Negative"  "Positive" };
+	property "position = (-410, -455)" ;
+}
+variable  "MLC_LYZ" { // 3 values
+	type discrete[3] {  "No MLCs"  "Negative"  "Positive" };
+	property "position = (-433, -461)" ;
+}
+variable  "MLC_I" { // 2 values
+	type discrete[2] {  "Absent (no)"  "Present (yes)" };
+	property "position = (-431, -469)" ;
+}
+variable  "LLC_I" { // 2 values
+	type discrete[2] {  "Absent (no)"  "Present (yes)" };
+	property "position = (-417, -468)" ;
+}
+variable  "LIPID" { // 2 values
+	type discrete[2] {  "Absent to few"  "Prominent" };
+	property "position = (-416, -448)" ;
+}
+variable  "HX_LA" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-430, -475)" ;
+}
+variable  "HEMATOX" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-457, -441)" ;
+}
+variable  "CMV" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-409, -472)" ;
+}
+variable  "BRUCELLA" { // 2 values
+	type discrete[2] {  "No"  "Yes" };
+	property "position = (-409, -474)" ;
+}
+variable  "COCCIDIA" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-409, -470)" ;
+}
+variable  "HISTOPLA" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-409, -469)" ;
+}
+variable  "LGV" { // 2 values
+	type discrete[2] {  "No"  "Yes" };
+	property "position = (-408, -467)" ;
+}
+variable  "VDRL" { // 2 values
+	type discrete[2] {  "No"  "Yes" };
+	property "position = (-408, -466)" ;
+}
+variable  "PLASCY_T" { // 3 values
+	type discrete[3] {  "Absent"  "Present"  "Prominent" };
+	property "position = (-437, -470)" ;
+}
+variable  "TB" { // 3 values
+	type discrete[3] {  "Absent"  "Present"  "Prominent" };
+	property "position = (-424, -474)" ;
+}
+variable  "MELANIN" { // 3 values
+	type discrete[3] {  "Absent to normal"  "Present"  "Prominent" };
+	property "position = (-418, -443)" ;
+}
+variable  "MC_SL_NS" { // 5 values
+	type discrete[5] {  "No follicles/no mantle zones"  "Round"  "Slightly irregular"  "Moderately irregular"  "Markedly irregular" };
+	property "position = (-449, -459)" ;
+}
+variable  "FMZ_FUS" { // 4 values
+	type discrete[4] {  "No thick mantle zones"  "No nodules no fusion"  "Nodules but no fusion"  "Fusion with or without nodules" };
+	property "position = (-459, -458)" ;
+}
+variable  "BH_NOS_L" { // 4 values
+	type discrete[4] {  "No NOS benign histiocytes"  "Mainly interfollicular"  "Mainly sinusoidal"  "Both interfollicular and sinusoidal" };
+	property "position = (-410, -445)" ;
+}
+variable  "SLC_NI" { // 5 values
+	type discrete[5] {  "No SLCs"  "None identifiable"  "1 or more peripheral small"  "1 central medium to large"  "Other" };
+	property "position = (-436, -467)" ;
+}
+variable  "HYALIN" { // 3 values
+	type discrete[3] {  "Absent"  "Present"  "Prominent" };
+	property "position = (-444, -441)" ;
+}
+probability (  "Fault" ) { // 1 variable(s) and 1 values
+	table 0.2 ;
+}
+probability (  "ACID"  "TB" ) { // 2 variable(s) and 6 values
+	table 1.0 0.1 0.0 0.0 0.9 1.0 ;
+}
+probability (  "F_CSA"  "Fault"  "FOLLICLE" ) { // 3 variable(s) and 15 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.9 0.9 0.9 0.9 0.0 0.1 0.1 0.1 0.1 ;
+}
+probability (  "F_ISL"  "Fault"  "F_HEM" ) { // 3 variable(s) and 9 values
+	table 1.0 0.0 0.0 0.0 0.8 0.7 0.0 0.2 0.3 ;
+}
+probability (  "F_POL"  "Fault"  "FOLLICLE" ) { // 3 variable(s) and 15 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.05 0.05 0.05 0.05 0.0 0.95 0.95 0.95 0.95 ;
+}
+probability (  "F_RPBV"  "Fault"  "F_CSA" ) { // 3 variable(s) and 12 values
+	table 1.0 0.0 0.0 0.0 0.989 0.989 0.0 0.01 0.01 0.0 0.0010 0.0010 ;
+}
+probability (  "BH_LANG"  "Fault" ) { // 2 variable(s) and 4 values
+	table 0.989 0.01 0.0010 0.0 ;
+}
+probability (  "BH_FOAM"  "Fault" ) { // 2 variable(s) and 5 values
+	table 0.98 0.02 0.0010 0.0 0.0 ;
+}
+probability (  "BH_NOS"  "Fault"  "NECR" ) { // 3 variable(s) and 12 values
+	table 0.99 0.97 0.95 0.95 0.01 0.03 0.05 0.05 0.0 0.0 0.0 0.0 ;
+}
+probability (  "BH_SS"  "Fault" ) { // 2 variable(s) and 5 values
+	table 0.9 0.099 0.0010 0.0 0.0 ;
+}
+probability (  "CA"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "SR"  "Fault"  "MONO" ) { // 3 variable(s) and 20 values
+	table 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "DVS"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.99999 1.0E-5 ;
+}
+probability (  "EMPERI"  "Fault"  "BH_NOS" ) { // 3 variable(s) and 9 values
+	table 1.0 1.0 1.0 0.0 1.0E-5 1.0E-4 0.0 0.0 0.0 ;
+}
+probability (  "MA_EOSIN"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "EMM"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "EOSIN"  "Fault"  "EMM" ) { // 3 variable(s) and 6 values
+	table 0.599 0.0 0.4 0.0 0.0010 0.0 ;
+}
+probability (  "EHC"  "Fault" ) { // 2 variable(s) and 3 values
+	table 0.98 0.02 0.0 ;
+}
+probability (  "EHC_ENC"  "Fault"  "FOLLICLE"  "EHC" ) { // 4 variable(s) and 60 values
+	table 1.0 1.0 1.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.999 0.999 0.0 0.999 0.999 0.0 0.999 0.999 0.0 0.999 0.999 0.0 0.0 0.0 0.0 0.0010 0.0010 0.0 0.0010 0.0010 0.0 0.0010 0.0010 0.0 0.0010 0.0010 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "EH_NC"  "Fault" ) { // 2 variable(s) and 3 values
+	table 0.9 0.1 0.0 ;
+}
+probability (  "ECCC"  "Fault"  "LLC_I"  "MLC_I" ) { // 4 variable(s) and 16 values
+	table 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "FCB"  "Fault"  "CT" ) { // 3 variable(s) and 12 values
+	table 0.94 0.94 0.9 0.9 0.05 0.05 0.08 0.08 0.01 0.01 0.02 0.02 ;
+}
+probability (  "FCB_NOD"  "Fault"  "FCB" ) { // 3 variable(s) and 9 values
+	table 1.0 0.0 0.0 0.0 0.995 0.99 0.0 0.0050 0.01 ;
+}
+probability (  "FIBROS"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "FITE"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "FBODY"  "Fault" ) { // 2 variable(s) and 3 values
+	table 0.999 0.0010 0.0 ;
+}
+probability (  "GENE_TC"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "HAIRY"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "HTLV_I"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.999 0.0010 ;
+}
+probability (  "HIV"  "HIV_ST" ) { // 2 variable(s) and 6 values
+	table 0.9999 1.0E-4 1.0E-4 1.0E-4 0.9999 0.9999 ;
+}
+probability (  "INTFOL"  "Fault"  "FOLLICLE" ) { // 3 variable(s) and 15 values
+	table 0.0 0.0 0.6 0.99 0.999 0.0 0.0 0.39 0.01 0.0010 1.0 0.0 0.01 0.0 0.0 ;
+}
+probability (  "ICLC"  "Fault"  "ECCC"  "LLC_I"  "MLC_I" ) { // 5 variable(s) and 32 values
+	table 1.0 1.0 0.9999 0.9999 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0E-4 1.0E-4 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "KARYO"  "Fault"  "NECR" ) { // 3 variable(s) and 12 values
+	table 0.999 0.9 0.8 0.75 0.0010 0.09 0.18 0.2 0.0 0.01 0.02 0.05 ;
+}
+probability (  "L_and_H"  "Fault"  "LH_NOD" ) { // 3 variable(s) and 10 values
+	table 0.999 0.999 0.0010 0.0010 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "LH_NOD"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "LACUN"  "Fault" ) { // 2 variable(s) and 6 values
+	table 0.999 0.0010 0.0 0.0 0.0 0.0 ;
+}
+probability (  "LANG"  "Fault" ) { // 2 variable(s) and 3 values
+	table 0.9999 1.0E-4 0.0 ;
+}
+probability (  "LEUK"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "LLC_CY"  "Fault"  "LLC_ID" ) { // 3 variable(s) and 16 values
+	table 1.0 0.0 0.0 0.0 0.0 0.6 0.998 0.99 0.0 0.2 0.0010 0.0050 0.0 0.2 0.0010 0.0050 ;
+}
+probability (  "LLC_NS"  "Fault"  "LLC_ID" ) { // 3 variable(s) and 24 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.01 0.99 0.01 0.0 0.99 0.01 0.99 ;
+}
+probability (  "LLC"  "Fault" ) { // 2 variable(s) and 5 values
+	table 0.94 0.05 0.01 0.0 0.0 ;
+}
+probability (  "F_POPU"  "Fault"  "FOLLICLE" ) { // 3 variable(s) and 25 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.02 0.02 0.02 0.02 0.0 0.01 0.01 0.01 0.01 0.0 0.03 0.03 0.03 0.03 0.0 0.94 0.94 0.94 0.94 ;
+}
+probability (  "MAST"  "Fault" ) { // 2 variable(s) and 3 values
+	table 0.9 0.1 0.0 ;
+}
+probability (  "MLC"  "Fault" ) { // 2 variable(s) and 5 values
+	table 0.79 0.2 0.01 0.0 0.0 ;
+}
+probability (  "MELANOMA"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "MF10HP"  "Fault" ) { // 2 variable(s) and 4 values
+	table 0.899 0.1 0.0010 0.0 ;
+}
+probability (  "MLC_CY"  "Fault"  "MLC" ) { // 3 variable(s) and 20 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.9 0.9 0.9 0.9 0.0 0.05 0.05 0.05 0.05 0.0 0.05 0.05 0.05 0.05 ;
+}
+probability (  "MLC_NS"  "Fault"  "MLC" ) { // 3 variable(s) and 25 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.01 0.01 0.01 0.01 0.0 0.99 0.99 0.99 0.99 ;
+}
+probability (  "MLC_NI"  "Fault"  "MLC" ) { // 3 variable(s) and 25 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.1 0.1 0.1 0.1 0.0 0.4 0.4 0.4 0.4 0.0 0.49 0.49 0.49 0.49 0.0 0.01 0.01 0.01 0.01 ;
+}
+probability (  "MCC"  "Fault" ) { // 2 variable(s) and 4 values
+	table 0.05 0.85 0.1 0.0 ;
+}
+probability (  "MONO"  "Fault"  "MUMMY" ) { // 3 variable(s) and 16 values
+	table 0.9999 0.999 0.0 0.0 1.0E-4 0.0010 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "MOT_HIST"  "Fault" ) { // 2 variable(s) and 4 values
+	table 0.64 0.25 0.1 0.01 ;
+}
+probability (  "MOT_LLC"  "Fault"  "LLC" ) { // 3 variable(s) and 20 values
+	table 1.0 0.885 0.885 0.0 1.0 0.0 0.1 0.1 0.0 0.0 0.0 0.01 0.01 0.0 0.0 0.0 0.0050 0.0050 0.0 0.0 ;
+}
+probability (  "MUMMY"  "Fault" ) { // 2 variable(s) and 4 values
+	table 0.999 0.0010 0.0 0.0 ;
+}
+probability (  "NECR"  "Fault" ) { // 2 variable(s) and 4 values
+	table 0.99 0.01 0.0 0.0 ;
+}
+probability (  "MA_NEUT"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "NEUTRO"  "Fault" ) { // 2 variable(s) and 3 values
+	table 0.691 0.3 0.0090 ;
+}
+probability (  "PAS"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "PI"  "Fault" ) { // 2 variable(s) and 3 values
+	table 0.95 0.04 0.01 ;
+}
+probability (  "PLASMA"  "Fault"  "MOT_HIST" ) { // 3 variable(s) and 24 values
+	table 0.5 0.5 0.5 0.5 0.48 0.48 0.48 0.37 0.015 0.015 0.015 0.035 0.0050 0.0050 0.0050 0.095 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "PC_TP"  "Fault"  "PLASMA" ) { // 3 variable(s) and 36 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.929 0.929 0.929 0.929 0.929 0.0 0.02 0.02 0.02 0.02 0.02 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0010 0.0010 0.0010 0.0010 0.0010 0.0 0.05 0.05 0.05 0.05 0.05 ;
+}
+probability (  "PLEO"  "Fault" ) { // 2 variable(s) and 5 values
+	table 1.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "PFP"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "PTGC_NOD"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.98 0.02 ;
+}
+probability (  "RD_BOD"  "Fault"  "PLASMA" ) { // 3 variable(s) and 12 values
+	table 1.0 0.9999 0.999 0.99 0.98 0.0 0.0 1.0E-4 0.0010 0.01 0.02 0.0 ;
+}
+probability (  "SARCOMA"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "SCHAUM"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "S_RING"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "SLC_CY"  "Fault"  "SLC" ) { // 3 variable(s) and 20 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.99 0.999 0.999 0.999 0.0 0.01 0.0010 0.0010 0.0010 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "SLC_NS"  "Fault"  "SLC" ) { // 3 variable(s) and 25 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 ;
+}
+probability (  "SLC"  "Fault" ) { // 2 variable(s) and 5 values
+	table 0.0 0.0 0.01 0.29 0.7 ;
+}
+probability (  "SINUSES"  "Fault"  "INTFOL"  "FOLLICLE" ) { // 4 variable(s) and 60 values
+	table 0.0 0.01 0.01 0.02 0.01 0.0 0.0010 0.0010 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.99 0.95 0.96 0.01 0.0 0.05 0.05 0.25 0.01 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.04 0.02 0.4 0.0 0.919 0.9 0.72 0.1 0.0 0.0 0.9 0.0 0.0 0.0 0.0 0.0 0.0 0.58 0.0 0.03 0.05 0.03 0.89 0.0 0.0 0.1 0.0 0.0 ;
+}
+probability (  "VASC_C"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "VASC_NS"  "Fault" ) { // 2 variable(s) and 5 values
+	table 0.05 0.73 0.2 0.02 0.0 ;
+}
+probability (  "VASC_S"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "F_HEM"  "Fault"  "FOLLICLE" ) { // 3 variable(s) and 15 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.55 0.55 0.55 0.55 0.0 0.45 0.45 0.45 0.45 ;
+}
+probability (  "TAB"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "CT"  "Fault" ) { // 2 variable(s) and 4 values
+	table 0.775 0.2 0.02 0.0050 ;
+}
+probability (  "GENE_IG"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.99 0.01 ;
+}
+probability (  "HIV_ST"  "Fault" ) { // 2 variable(s) and 3 values
+	table 0.0 0.03 0.97 ;
+}
+probability (  "MLC_LLC"  "Fault"  "LLC"  "MLC" ) { // 4 variable(s) and 50 values
+	table 1.0 1.0 1.0 0.0 0.0 1.0 1.0 1.0 0.0 0.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 0.0 0.0 0.0 1.0 1.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 ;
+}
+probability (  "LLC_NI"  "Fault"  "LLC_ID" ) { // 3 variable(s) and 20 values
+	table 1.0 0.0 0.0 0.0 0.0 0.05 0.05 0.05 0.0 0.59 0.59 0.59 0.0 0.35 0.35 0.35 0.0 0.01 0.01 0.01 ;
+}
+probability (  "SLC_CS"  "Fault"  "SLC" ) { // 3 variable(s) and 25 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.99 0.99 0.99 0.99 0.0 0.01 0.01 0.01 0.01 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "LLC_ID"  "Fault"  "LLC" ) { // 3 variable(s) and 20 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.5 0.5 0.0 0.0 0.0 0.05 0.05 0.0 0.0 0.0 0.45 0.45 0.0 0.0 ;
+}
+probability (  "FOLLICLE"  "Fault" ) { // 2 variable(s) and 5 values
+	table 0.0 0.0 0.21 0.74 0.05 ;
+}
+probability (  "F_DEN"  "Fault"  "FOLLICLE" ) { // 3 variable(s) and 25 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.9 0.0 0.01 0.01 0.795 0.1 0.0 0.5 0.5 0.0050 0.0 0.0 0.49 0.49 0.0 0.0 ;
+}
+probability (  "F_SS"  "Fault"  "F_POL" ) { // 3 variable(s) and 15 values
+	table 1.0 0.0 0.0 0.0 0.94 0.0 0.0 0.03 0.01 0.0 0.02 0.15 0.0 0.01 0.84 ;
+}
+probability (  "F_MZSTAT"  "Fault"  "F_MZ" ) { // 3 variable(s) and 15 values
+	table 1.0 1.0 0.0 0.0 0.0 0.9399 0.0 0.0 0.05 0.0 0.0 0.01 0.0 0.0 1.0E-4 ;
+}
+probability (  "F_MZCM"  "Fault"  "F_MZ" ) { // 3 variable(s) and 9 values
+	table 1.0 1.0 0.0 0.0 0.0 0.99 0.0 0.0 0.01 ;
+}
+probability (  "F_DEF"  "Fault"  "FOLLICLE" ) { // 3 variable(s) and 20 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.83 0.83 0.83 0.83 0.0 0.15 0.15 0.15 0.15 0.0 0.02 0.02 0.02 0.02 ;
+}
+probability (  "F_MITO"  "Fault"  "FOLLICLE" ) { // 3 variable(s) and 20 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.05 0.05 0.05 0.05 0.0 0.15 0.15 0.15 0.15 0.0 0.8 0.8 0.8 0.8 ;
+}
+probability (  "F_MZ"  "Fault"  "FOLLICLE" ) { // 3 variable(s) and 15 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.95 0.95 0.95 0.95 0.0 0.05 0.05 0.05 0.05 ;
+}
+probability (  "F_CIO"  "Fault"  "FOLLICLE" ) { // 3 variable(s) and 20 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.1 0.1 0.1 0.1 0.0 0.9 0.9 0.9 0.9 ;
+}
+probability (  "LLC_KL"  "Fault"  "LLC_ID" ) { // 3 variable(s) and 16 values
+	table 1.0 0.0 0.0 0.0 0.0 0.1 0.1 0.1 0.0 0.0 0.0 0.0 0.0 0.9 0.9 0.9 ;
+}
+probability (  "PLAS_KL"  "Fault"  "PLASMA" ) { // 3 variable(s) and 24 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.99 0.99 0.99 0.99 0.99 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.01 0.01 0.01 0.01 0.01 ;
+}
+probability (  "FCC_KL"  "Fault"  "FOLLICLE" ) { // 3 variable(s) and 20 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.99 0.99 0.99 0.99 0.0 0.0 0.0 0.0 0.0 0.0 0.01 0.01 0.01 0.01 ;
+}
+probability (  "MZL_KL"  "Fault"  "F_MZ" ) { // 3 variable(s) and 12 values
+	table 1.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "SR_LEU"  "Fault"  "SR" ) { // 3 variable(s) and 25 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.01 0.01 0.01 0.01 0.0 0.0 0.0 0.0 0.0 0.0 0.99 0.99 0.99 0.99 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "LAC_LEU"  "Fault"  "LACUN" ) { // 3 variable(s) and 30 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.01 0.01 0.01 0.01 0.01 0.0 0.01 0.01 0.01 0.01 0.01 0.0 0.98 0.98 0.98 0.98 0.98 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "PLEO_LEU"  "Fault"  "PLEO" ) { // 3 variable(s) and 25 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "MONO_LEU"  "Fault"  "MONO" ) { // 3 variable(s) and 20 values
+	table 1.0 0.0 0.0 0.0 0.0 0.1 0.1 0.1 0.0 0.0 0.0 0.0 0.0 0.9 0.9 0.9 0.0 0.0 0.0 0.0 ;
+}
+probability (  "LH_LEU"  "Fault"  "L_and_H" ) { // 3 variable(s) and 25 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "CA_KER"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "MLC_LEU9"  "Fault"  "MLC" ) { // 3 variable(s) and 15 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "MLC_TDT"  "Fault"  "MLC" ) { // 3 variable(s) and 15 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "CA_CHROM"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "UCHL_1"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.1 0.9 ;
+}
+probability (  "KI_AB"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "L_26"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.5 0.5 ;
+}
+probability (  "BER_H2"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "SEMINOMA"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "AGE"  "Fault" ) { // 2 variable(s) and 4 values
+	table 0.05 0.4 0.54 0.01 ;
+}
+probability (  "LYMPHADE"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.15 0.85 ;
+}
+probability (  "MED_MASS"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.99 0.01 ;
+}
+probability (  "HMB45"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "MLC_LYZ"  "Fault"  "MLC" ) { // 3 variable(s) and 15 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "MLC_I"  "MLC" ) { // 2 variable(s) and 10 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 ;
+}
+probability (  "LLC_I"  "LLC" ) { // 2 variable(s) and 10 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 ;
+}
+probability (  "LIPID"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.99 0.01 ;
+}
+probability (  "HX_LA"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.995 0.0050 ;
+}
+probability (  "HEMATOX"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "CMV"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.98 0.02 ;
+}
+probability (  "BRUCELLA"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.999999 1.0E-6 ;
+}
+probability (  "COCCIDIA"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.95 0.05 ;
+}
+probability (  "HISTOPLA"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.95 0.05 ;
+}
+probability (  "LGV"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.97 0.03 ;
+}
+probability (  "VDRL"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.97 0.03 ;
+}
+probability (  "PLASCY_T"  "Fault" ) { // 2 variable(s) and 3 values
+	table 0.99999 1.0E-5 0.0 ;
+}
+probability (  "TB"  "Fault"  "HIV_ST" ) { // 3 variable(s) and 9 values
+	table 0.999999 0.98 0.8 1.0E-6 0.02 0.2 0.0 0.0 0.0 ;
+}
+probability (  "MELANIN"  "Fault" ) { // 2 variable(s) and 3 values
+	table 0.3 0.65 0.05 ;
+}
+probability (  "MC_SL_NS"  "Fault"  "F_MZ" ) { // 3 variable(s) and 15 values
+	table 1.0 1.0 0.0 0.0 0.0 0.99 0.0 0.0 0.01 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "FMZ_FUS"  "Fault"  "F_MZSTAT" ) { // 3 variable(s) and 20 values
+	table 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.9 0.0 0.0 0.0 0.0 0.1 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "BH_NOS_L"  "Fault"  "BH_NOS" ) { // 3 variable(s) and 12 values
+	table 0.0 0.0 0.0 0.99 0.99 0.99 0.0 0.0 0.0 0.01 0.01 0.01 ;
+}
+probability (  "SLC_NI"  "Fault"  "SLC" ) { // 3 variable(s) and 25 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.97 0.98 0.98 0.98 0.0 0.01 0.01 0.01 0.01 0.0 0.01 0.01 0.01 0.01 0.0 0.01 0.0 0.0 0.0 ;
+}
+probability (  "HYALIN"  "Fault" ) { // 2 variable(s) and 3 values
+	table 0.94 0.05 0.01 ;
+}

@@ -1,0 +1,33 @@
+echo on
+setenv DEBUG "FALSE"
+setenv BN_FILENAME "./bn/ex/Barley.bif"
+setenv PRUNE_PREC "-1"
+setenv PRUNE_TYPE "none"
+setenv DD_TYPE "AADD"
+load
+
+// Note: This is a bad interface, need to use direct command line
+//       conditional probability specification, e.g. P(BP | MINVOL:NORMAL, ...)
+
+// Query #1
+setenv NGODNN "query"
+timer start
+query
+timer stop
+
+// Query #1
+setenv PROTEIN ""
+setenv SPNDX "query"
+timer start
+query
+timer stop
+
+// Query #1
+setenv PROTEIN "query"
+setenv SPNDX "query"
+timer start
+query
+timer stop
+
+exit
+

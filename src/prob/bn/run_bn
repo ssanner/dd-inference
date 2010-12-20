@@ -1,0 +1,64 @@
+#!/bin/sh
+run1024 prob.bn.BNTest bn/ex/Alarm_JB.bif 111 AADD  100 -1 none > bn/runs/alarm_aadd.out
+run1024 prob.bn.BNTest bn/ex/Alarm_JB.bif 111 ADD   100 -1 none > bn/runs/alarm_add.out
+run1024 prob.bn.BNTest bn/ex/Alarm_JB.bif 111 TABLE 100 -1 none > bn/runs/alarm_table.out
+
+run1024 prob.bn.BNTest bn/ex/NoisyOr15.bif 111 AADD  100 -1 none > bn/runs/noisy_or_15_aadd.out
+run1024 prob.bn.BNTest bn/ex/NoisyOr15.bif 111 ADD   100 -1 none > bn/runs/noisy_or_15_add.out
+run1024 prob.bn.BNTest bn/ex/NoisyOr15.bif 111 TABLE 100 -1 none > bn/runs/noisy_or_15_table.out
+
+run1024 prob.bn.BNTest bn/ex/NoisyMax15.bif 111 AADD  100 -1 none > bn/runs/noisy_max_15_aadd.out
+run1024 prob.bn.BNTest bn/ex/NoisyMax15.bif 111 ADD   100 -1 none > bn/runs/noisy_max_15_add.out
+run1024 prob.bn.BNTest bn/ex/NoisyMax15.bif 111 TABLE 100 -1 none > bn/runs/noisy_max_15_table.out
+
+run1024 prob.bn.BNTest bn/ex/hailfinder.bif 111 AADD  100 -1 none > bn/runs/hailfinder_aadd.out
+run1024 prob.bn.BNTest bn/ex/hailfinder.bif 111 ADD   100 -1 none > bn/runs/hailfinder_add.out
+run1024 prob.bn.BNTest bn/ex/hailfinder.bif 111 TABLE 100 -1 none > bn/runs/hailfinder_table.out
+
+run1024 prob.bn.BNTest bn/ex/insurance.bif 111 AADD  100 -1 none > bn/runs/insurance_aadd.out
+run1024 prob.bn.BNTest bn/ex/insurance.bif 111 ADD   100 -1 none > bn/runs/insurance_add.out
+run1024 prob.bn.BNTest bn/ex/insurance.bif 111 TABLE 100 -1 none > bn/runs/insurance_table.out
+
+run1024 prob.bn.BNTest bn/ex/carpo.bif 111 AADD  100 -1 none > bn/runs/carpo_aadd.out
+run1024 prob.bn.BNTest bn/ex/carpo.bif 111 ADD   100 -1 none > bn/runs/carpo_add.out
+run1024 prob.bn.BNTest bn/ex/carpo.bif 111 TABLE 100 -1 none > bn/runs/carpo_table.out
+
+run1024 prob.bn.BNTest bn/ex/Barley.bif 111 AADD  100 -1 none 6 > bn/runs/barley_aadd.out
+run1024 prob.bn.BNTest bn/ex/Barley.bif 111 ADD   100 -1 none 6 > bn/runs/barley_add.out
+run1024 prob.bn.BNTest bn/ex/Barley.bif 111 TABLE 100 -1 none 6 > bn/runs/barley_table.out
+
+run1024 prob.bn.BNTest bn/ex/Diabetes.bif 111 AADD  100 -1 none 6 > bn/runs/diabetes_aadd.out
+run1024 prob.bn.BNTest bn/ex/Diabetes.bif 111 ADD   100 -1 none 6 > bn/runs/diabetes_add.out
+run1024 prob.bn.BNTest bn/ex/Diabetes.bif 111 TABLE 100 -1 none 6 > bn/runs/diabetes_table.out
+
+run1024 prob.bn.BNTest bn/ex/Mildew.bif 111 AADD  100 -1 none 6 > bn/runs/mildew_aadd.out
+run1024 prob.bn.BNTest bn/ex/Mildew.bif 111 ADD   100 -1 none 6 > bn/runs/mildew_add.out
+run1024 prob.bn.BNTest bn/ex/Mildew.bif 111 TABLE 100 -1 none 6 > bn/runs/mildew_table.out
+
+run1024 prob.bn.BNTest bn/ex/Munin1.bif 111 AADD  100 -1 none 6 > bn/runs/munin1_aadd.out
+run1024 prob.bn.BNTest bn/ex/Munin1.bif 111 ADD   100 -1 none 6 > bn/runs/munin1_add.out
+run1024 prob.bn.BNTest bn/ex/Munin1.bif 111 TABLE 100 -1 none 6 > bn/runs/munin1_table.out
+
+run1024 prob.bn.BNTest bn/ex/Pigs.bif 111 AADD  100 -1 none 6 > bn/runs/pigs_aadd.out
+run1024 prob.bn.BNTest bn/ex/Pigs.bif 111 ADD   100 -1 none 6 > bn/runs/pigs_add.out
+run1024 prob.bn.BNTest bn/ex/Pigs.bif 111 TABLE 100 -1 none 6 > bn/runs/pigs_table.out
+
+run1024 prob.bn.BNTest bn/ex/Water.bif 111 AADD  100 -1 none 6 > bn/runs/water_aadd.out
+run1024 prob.bn.BNTest bn/ex/Water.bif 111 ADD   100 -1 none 6 > bn/runs/water_add.out
+run1024 prob.bn.BNTest bn/ex/Water.bif 111 TABLE 100 -1 none 6 > bn/runs/water_table.out
+
+run1024 prob.bn.BNTest bn/ex/Link.bif 111 AADD  100 -1 none 6 > bn/runs/link_aadd.out
+run1024 prob.bn.BNTest bn/ex/Link.bif 111 ADD   100 -1 none 6 > bn/runs/link_add.out
+run1024 prob.bn.BNTest bn/ex/Link.bif 111 TABLE 100 -1 none 6 > bn/runs/link_table.out
+
+run1024 prob.bn.BNTest bn/ex/Munin2.bif 111 AADD  100 -1 none 6 > bn/runs/munin2_aadd.out
+run1024 prob.bn.BNTest bn/ex/Munin2.bif 111 ADD   100 -1 none 6 > bn/runs/munin2_add.out
+run1024 prob.bn.BNTest bn/ex/Munin2.bif 111 TABLE 100 -1 none 6 > bn/runs/munin2_table.out
+
+run1024 prob.bn.BNTest bn/ex/Munin3.bif 111 AADD  100 -1 none 6 > bn/runs/munin3_aadd.out
+run1024 prob.bn.BNTest bn/ex/Munin3.bif 111 ADD   100 -1 none 6 > bn/runs/munin3_add.out
+run1024 prob.bn.BNTest bn/ex/Munin3.bif 111 TABLE 100 -1 none 6 > bn/runs/munin3_table.out
+
+run1024 prob.bn.BNTest bn/ex/Munin4.bif 111 AADD  100 -1 none 6 > bn/runs/munin4_aadd.out
+run1024 prob.bn.BNTest bn/ex/Munin4.bif 111 ADD   100 -1 none 6 > bn/runs/munin4_add.out
+run1024 prob.bn.BNTest bn/ex/Munin4.bif 111 TABLE 100 -1 none 6 > bn/runs/munin4_table.out

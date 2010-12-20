@@ -1,0 +1,7 @@
+
+The lexer specification is in: 'bif.lex'
+
+To compile and build the parser, just use 'make'.  This
+has subcommands for the lexer and parser generation as
+well as compilation of all the class files.  -Scott
+

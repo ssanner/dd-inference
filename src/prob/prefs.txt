@@ -1,0 +1,21 @@
+DEBUG		FALSE
+BN_FILENAME	./bn/ex/insurance.bif
+BN_FILENAME	./bn/ex/Mildew.bif
+BN_FILENAME	./bn/ex/hailfinder.bif
+BN_FILENAME	./bn/ex/Water.bif
+BN_FILENAME	./bn/ex/PathFinder/pf1.bif
+BN_FILENAME	./bn/ex/Pigs.bif
+BN_FILENAME	./bn/ex/Link.bif
+BN_FILENAME	./bn/ex/Diabetes.bif
+BN_FILENAME	./bn/ex/PathFinder/pf23.bif
+BN_FILENAME	./bn/ex/carpo.bif
+BN_FILENAME	./bn/ex/Barley.bif
+BN_FILENAME	./bn/ex/Munin2.bif
+BN_FILENAME	./bn/ex/BigNoisyMax.bif
+BN_FILENAME	./bn/ex/MedNoisyMax.bif
+BN_FILENAME	./bn/ex/Alarm_JB.bif
+PRUNE_PREC	0.01
+PRUNE_TYPE	min
+DD_TYPE		AADD
+
+

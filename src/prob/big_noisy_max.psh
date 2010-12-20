@@ -1,0 +1,30 @@
+echo on
+setenv DEBUG "FALSE"
+setenv BN_FILENAME "./bn/ex/BigNoisyMax.bif"
+setenv PRUNE_PREC "0.01"
+setenv PRUNE_TYPE "none"
+setenv DD_TYPE "AADD"
+load
+
+// Note: This is a bad interface, need to use direct command line
+//       conditional probability specification, e.g. P(BP | MINVOL:NORMAL, ...)
+
+// Query #1
+setenv V23 "query"
+setenv V24 " "
+setenv V5 "assign:TRUE"
+setenv V7 "assign:TRUE"
+setenv V10 "assign:FALSE"
+setenv V14 "assign:FALSE"
+timer start
+query
+timer stop
+
+// Query #2
+setenv V23 " "
+setenv V24 "query"
+timer start
+query
+timer stop
+
+exit

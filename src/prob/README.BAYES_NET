@@ -1,0 +1,59 @@
+
+*********************************************************************
+Bayes Net Inference Engine
+Author: Scott Sanner
+*********************************************************************
+
+FOR USERS: Bayes Net Inference Interface
+
+o To run the text interface to the system **from the 'prob' directory**:
+
+    UNIX:    Type 'run prob.PShell' from 'prob' directory.
+    WINDOWS: Type 'CMD /C run.bat prob.PShell' from 'prob' directory.
+
+    Type 'help' from within the shell for information on commands.
+                           
+o Sample Bayes Nets in bn/ex/ directory:
+
+    Alarm_JB.bif     MedNoisyMax.bif  Munin4.bif      Water.bif
+    Barley.bif       Mildew.bif       NoisyMax15.bif  alarm.bif
+    BigNoisyMax.bif  Munin1.bif       NoisyOr15.bif   carpo.bif
+    Diabetes.bif     Munin2.bif       Pigs.bif        hailfinder.bif
+    Link.bif         Munin3.bif       Test.bif        insurance.bif
+
+  (Most of these are borrowed from public online repositories.)
+
+o The easiest way to familiarize yourself with how to load the Bayes Net
+  and query it is to look at and run the example scripts.  To run
+  these scripts type 'exec script-name' from within PSHell, or specify
+  them when PSHell is invoked:
+
+   o alarm_test.psh   
+   o big_noisy_max.psh  
+   o test.psh
+   o barley_test.psh  
+   o med_noisy_max.psh
+
+o For the tabular CPT representation one can set the DD_TYPE 
+  environmental variable to TABLE (enumerated tabular representation),
+  ADD (algebraic decision diagram), or AADD (affine ADD).  See
+  'alarm_test.psh' to see how DD_TYPE is specified.
+
+  For queries that involve context-specific independence, ADDs and
+  AADDs work well.  For queries that involve additive and multiplicative
+  independence (e.g., discretized linear functions, noisy-or), AADDs
+  work the best but can exhibit numerical precision issues for large
+  factors that occur during inference.
+
+*********************************************************************
+
+o Quick overview of main software components:
+
+    PShell.java  - Handles the main command line interface,
+                   see this code to understand how Bayes
+                   Nets are loaded and queries are specified
+                   and executed.
+
+    bn/BN.java   - Handles main Bayes net operations.
+
+*********************************************************************
