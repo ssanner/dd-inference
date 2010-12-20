@@ -1,0 +1,31 @@
+variables (a b c )
+action doa
+	a	(1.00)
+	b	(b	(1.00)
+			(0.00))
+	c	(c	(1.00)
+			(0.00))
+
+endaction
+action dob
+	a	(0.00)
+	b	(a	(1.00)
+			(0.00))
+	c	(c	(1.00)
+			(0.00))
+
+endaction
+action doc
+	a	(0.00)
+	b	(0.00)
+	c	(a	(b	(1.00)
+				(0.00))
+			(0.00))
+
+endaction
+reward (a	(b	(c	(10000000000000000.00)
+						(0.00))
+		(0.00))
+       (0.00))
+discount 0.990000 
+tolerance 0.010000 

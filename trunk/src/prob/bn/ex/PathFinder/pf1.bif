@@ -1,0 +1,766 @@
+// Bayesian network
+network "BayesianNetwork" { // 109 variables and 109 probability distributions
+}
+variable  "Fault" { // 1 values
+	type discrete[1] {  "AIDS early" };
+	property "position = (-441, -473)" ;
+}
+variable  "F1" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-416, -446)" ;
+}
+variable  "F2" { // 3 values
+	type discrete[3] {  "NA"  "No"  "Yes" };
+	property "position = (-457, -469)" ;
+}
+variable  "F3" { // 3 values
+	type discrete[3] {  "NA"  "No"  "Yes" };
+	property "position = (-458, -464)" ;
+}
+variable  "F4" { // 3 values
+	type discrete[3] {  "NA"  "No"  "Yes" };
+	property "position = (-446, -469)" ;
+}
+variable  "F5" { // 4 values
+	type discrete[4] {  "NA"  "None"  "One"  "More than one" };
+	property "position = (-458, -467)" ;
+}
+variable  "F6" { // 4 values
+	type discrete[4] {  "Absent"  "Slight"  "Moderate"  "Marked" };
+	property "position = (-417, -452)" ;
+}
+variable  "F7" { // 5 values
+	type discrete[5] {  "Absent"  "Rare"  "Focal"  "Multifocal"  "Extensive" };
+	property "position = (-417, -451)" ;
+}
+variable  "F8" { // 3 values
+	type discrete[3] {  "Absent to slight (<5%)"  "Moderate (5-50%)"  "Marked (>50%)" };
+	property "position = (-424, -456)" ;
+}
+variable  "F9" { // 5 values
+	type discrete[5] {  "Absent"  "Rare"  "Focal SS pattern"  "Multifocal SS pattern"  "Extensive SS pattern" };
+	property "position = (-416, -449)" ;
+}
+variable  "F10" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-453, -446)" ;
+}
+variable  "F11" { // 5 values
+	type discrete[5] {  "Absent"  "Rare (<3)"  "Present (3-15)"  "Many (16-50)"  "Striking (>50)" };
+	property "position = (-438, -452)" ;
+}
+variable  "F12" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-453, -448)" ;
+}
+variable  "F13" { // 3 values
+	type discrete[3] {  "Absent"  "Present (1-2)"  "Prominent (>2)" };
+	property "position = (-422, -454)" ;
+}
+variable  "F14" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-437, -446)" ;
+}
+variable  "F15" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-431, -450)" ;
+}
+variable  "F16" { // 3 values
+	type discrete[3] {  "Absent"  "Present"  "Prominent" };
+	property "position = (-429, -452)" ;
+}
+variable  "F17" { // 3 values
+	type discrete[3] {  "Absent"  "Present (<5%)"  "Prominent (>5%)" };
+	property "position = (-452, -457)" ;
+}
+variable  "F18" { // 4 values
+	type discrete[4] {  "NA"  "No"  "Some"  "Many" };
+	property "position = (-451, -460)" ;
+}
+variable  "F19" { // 3 values
+	type discrete[3] {  "Absent"  "Present (<5%)"  "Prominent (>5%)" };
+	property "position = (-417, -456)" ;
+}
+variable  "F20" { // 4 values
+	type discrete[4] {  "Absent"  "Rare (1-10%)"  "Present (11-50%)"  "Many (51-70%)" };
+	property "position = (-426, -475)" ;
+}
+variable  "F21" { // 3 values
+	type discrete[3] {  "Absent"  "Present"  "Prominent" };
+	property "position = (-458, -450)" ;
+}
+variable  "F22" { // 3 values
+	type discrete[3] {  "NA"  "Absent"  "Present" };
+	property "position = (-458, -453)" ;
+}
+variable  "F23" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-454, -451)" ;
+}
+variable  "F24" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-416, -444)" ;
+}
+variable  "F25" { // 3 values
+	type discrete[3] {  "Absent"  "Present (1-5)"  "Prominent (>5)" };
+	property "position = (-445, -450)" ;
+}
+variable  "F26" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-431, -441)" ;
+}
+variable  "F27" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-457, -444)" ;
+}
+variable  "F28" { // 2 values
+	type discrete[2] {  "Negative"  "Positive" };
+	property "position = (-416, -443)" ;
+}
+variable  "F29" { // 2 values
+	type discrete[2] {  "Negative"  "Positive" };
+	property "position = (-416, -441)" ;
+}
+variable  "F30" { // 6 values
+	type discrete[6] {  "NA"  "No expansion"  "Sml (each < 10%)"  "Large focus/foci"  "Uniform mild-mod exp"  "Uniform marked exp" };
+	property "position = (-447, -473)" ;
+}
+variable  "F31" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-434, -475)" ;
+}
+variable  "F32" { // 3 values
+	type discrete[3] {  "Absent"  "Present"  "Prominent" };
+	property "position = (-416, -458)" ;
+}
+variable  "F33" { // 5 values
+	type discrete[5] {  "Absent"  "Rare (<6)"  "Few (6-25)"  "Many (26-100)"  "Striking (>100)" };
+	property "position = (-444, -456)" ;
+}
+variable  "F34" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-457, -474)" ;
+}
+variable  "F35" { // 6 values
+	type discrete[6] {  "Absent"  "Rare (<6 cells)"  "Few (6-25 cells)"  "Many (26 - 100 cells)"  "Striking (>100 cells)"  "Sheets (>50% of sec)" };
+	property "position = (-443, -455)" ;
+}
+variable  "F36" { // 3 values
+	type discrete[3] {  "Absent"  "Present (1-5)"  "Prominent (>5)" };
+	property "position = (-443, -449)" ;
+}
+variable  "F37" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-452, -443)" ;
+}
+variable  "F38" { // 5 values
+	type discrete[5] {  "NA"  "Clumped"  "Vesicular"  "Fine and delicate"  "Cartwheel" };
+	property "position = (-417, -466)" ;
+}
+variable  "F39" { // 4 values
+	type discrete[4] {  "NA"  "Scanty"  "Mod-abund clear"  "Mod-abund deep" };
+	property "position = (-424, -463)" ;
+}
+variable  "F40" { // 8 values
+	type discrete[8] {  "NA"  "Round (most)"  "Slightly irregular (most)"  "Irregular (most)"  "Convoluted (some)"  "Cerebriform (some)"  "Multilobated (some)"  "Mulberry (some)" };
+	property "position = (-416, -463)" ;
+}
+variable  "F41" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-421, -460)" ;
+}
+variable  "F42" { // 9 values
+	type discrete[9] {  "NA"  ">80% 6-12u pr vr ns"  ">80% 6-12u no pr vr ns"  ">50% 13-20u nucleoli"  ">50% 13-20u no nucleoli"  ">50% >20u nucleoli"  ">50% >20u no nucleoli"  "mixed, sml cl pr var ns"  "mixed, sml cl not pr vr" };
+	property "position = (-448, -461)" ;
+}
+variable  "F43" { // 3 values
+	type discrete[3] {  "Absent"  "Present (1-50)"  "Prominent (>50)" };
+	property "position = (-441, -447)" ;
+}
+variable  "F44" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-430, -460)" ;
+}
+variable  "F45" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-452, -444)" ;
+}
+variable  "F46" { // 4 values
+	type discrete[4] {  "0-5"  "6-15"  "16-50"  ">50" };
+	property "position = (-440, -441)" ;
+}
+variable  "F47" { // 5 values
+	type discrete[5] {  "NA"  "Clumped"  "Vesicular"  "Fine and delicate"  "Cartwheel" };
+	property "position = (-426, -464)" ;
+}
+variable  "F48" { // 4 values
+	type discrete[4] {  "NA"  "Scanty"  "Mod-abund clear"  "Mod-abund deep" };
+	property "position = (-434, -463)" ;
+}
+variable  "F49" { // 7 values
+	type discrete[7] {  "NA"  "Round"  "Slightly irregular"  "Irregular"  "Convoluted"  "Cerebriform"  "Multilobulated" };
+	property "position = (-428, -462)" ;
+}
+variable  "F50" { // 6 values
+	type discrete[6] {  "NA"  "No nucleoli"  "1 small"  "1 prominent (central)"  ">1 central"  ">1 peripheral" };
+	property "position = (-429, -467)" ;
+}
+variable  "F51" { // 4 values
+	type discrete[4] {  "Absent"  "Present (<5%)"  "Prominent (5-50%)"  "Confluence (>50%)" };
+	property "position = (-434, -451)" ;
+}
+variable  "F52" { // 4 values
+	type discrete[4] {  "Absent"  "Rare (<3)"  "Present (3-20)"  "Many (>20)" };
+	property "position = (-437, -449)" ;
+}
+variable  "F53" { // 4 values
+	type discrete[4] {  "Absent"  "Focal (non-extensive)"  "Multifocal (non-extensive)"  "Extensive" };
+	property "position = (-416, -454)" ;
+}
+variable  "F54" { // 4 values
+	type discrete[4] {  "Absent"  "Focal (non-extensive)"  "Multifocal (non-extensive)"  "Extensive" };
+	property "position = (-423, -458)" ;
+}
+variable  "F55" { // 4 values
+	type discrete[4] {  "Absent"  "Rare (<3)"  "Present (3-20)"  "Many (>20)" };
+	property "position = (-441, -451)" ;
+}
+variable  "F56" { // 4 values
+	type discrete[4] {  "Absent"  "Focal (non-extensive)"  "Multifocal (non-extensive)"  "Extensive" };
+	property "position = (-420, -457)" ;
+}
+variable  "F57" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-431, -447)" ;
+}
+variable  "F58" { // 3 values
+	type discrete[3] {  "Absent"  "Present"  "Prominent" };
+	property "position = (-429, -445)" ;
+}
+variable  "F59" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-418, -447)" ;
+}
+variable  "F60" { // 3 values
+	type discrete[3] {  "Absent"  "Present"  "Prominent" };
+	property "position = (-458, -472)" ;
+}
+variable  "F61" { // 6 values
+	type discrete[6] {  "Absent"  "Few (<5%)"  "Moderate (6-20%)"  "Marked (21-50%)"  "Striking (51-90%)"  "Sheets (>90%)" };
+	property "position = (-426, -453)" ;
+}
+variable  "F62" { // 6 values
+	type discrete[6] {  "NA"  "Mature"  "Immature"  "Blastic"  "Pleomorphic"  "Mixed" };
+	property "position = (-426, -449)" ;
+}
+variable  "F63" { // 5 values
+	type discrete[5] {  "Absent"  "Rare (<6)"  "Few (6-25)"  "Many (26-100)"  "Striking (>100)" };
+	property "position = (-444, -458)" ;
+}
+variable  "F64" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-452, -475)" ;
+}
+variable  "F65" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-458, -473)" ;
+}
+variable  "F66" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-421, -449)" ;
+}
+variable  "F67" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-453, -441)" ;
+}
+variable  "F68" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-458, -443)" ;
+}
+variable  "F69" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-458, -441)" ;
+}
+variable  "F70" { // 4 values
+	type discrete[4] {  "NA"  "Scanty"  "Mod-abund clear"  "Mod-abund deep" };
+	property "position = (-442, -463)" ;
+}
+variable  "F71" { // 8 values
+	type discrete[8] {  "NA"  "Round"  "Slightly irregular"  "Irregular"  "Markedly irregular"  "Convoluted"  "Cerebriform"  "Multilobulated" };
+	property "position = (-438, -462)" ;
+}
+variable  "F72" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-439, -460)" ;
+}
+variable  "F73" { // 5 values
+	type discrete[5] {  "Absent"  "Rare (<6)"  "Few (6-25)"  "Many (26-100)"  "Striking (>100)" };
+	property "position = (-440, -453)" ;
+}
+variable  "F74" { // 4 values
+	type discrete[4] {  "Distended"  "Patent"  "Part-greatly obliterated"  "Completely obliterated" };
+	property "position = (-452, -473)" ;
+}
+variable  "F75" { // 2 values
+	type discrete[2] {  "No"  "Yes" };
+	property "position = (-450, -451)" ;
+}
+variable  "F76" { // 5 values
+	type discrete[5] {  "Absent"  "Slight"  "Moderate"  "Marked"  "Pronounced" };
+	property "position = (-451, -449)" ;
+}
+variable  "F77" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-448, -448)" ;
+}
+variable  "F78" { // 3 values
+	type discrete[3] {  "NA"  "No"  "Yes" };
+	property "position = (-458, -466)" ;
+}
+variable  "F79" { // 3 values
+	type discrete[3] {  "Absent"  "Present"  "Prominent" };
+	property "position = (-440, -457)" ;
+}
+variable  "F80" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-431, -442)" ;
+}
+variable  "F81" { // 5 values
+	type discrete[5] {  "NA"  "Sparse (1-10%)"  "Moderate (11-50%)"  "Numerous (51-90%)"  "Striking (>90%)" };
+	property "position = (-443, -461)" ;
+}
+variable  "F82" { // 5 values
+	type discrete[5] {  "NA"  "Sparse (<10%)"  "Moderate (11-50%)"  "Numerous (51-90%)"  "Striking (>90%)" };
+	property "position = (-435, -460)" ;
+}
+variable  "F83" { // 5 values
+	type discrete[5] {  "NA"  "Sparse (<10%)"  "Moderate (11-50%)"  "Numerous (51-90%)"  "Striking (>90%)" };
+	property "position = (-425, -460)" ;
+}
+variable  "F84" { // 4 values
+	type discrete[4] {  "Absent"  "Rare (1-10%)"  "Present (11-50%)"  "Many (51-70%)" };
+	property "position = (-420, -468)" ;
+}
+variable  "F85" { // 4 values
+	type discrete[4] {  "Absent"  "Rare (1-10%)"  "Present (11-50%)"  "Many (51-70%)" };
+	property "position = (-431, -469)" ;
+}
+variable  "F86" { // 4 values
+	type discrete[4] {  "Absent"  "Rare (1-10%)"  "Present (11-50%)"  "Many (51-70%)" };
+	property "position = (-440, -468)" ;
+}
+variable  "F87" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-416, -471)" ;
+}
+variable  "F88" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-427, -472)" ;
+}
+variable  "F89" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-438, -471)" ;
+}
+variable  "F90" { // 4 values
+	type discrete[4] {  "Absent"  "Slight (<10)"  "Moderate (10-20)"  "Marked (>20)" };
+	property "position = (-454, -454)" ;
+}
+variable  "F91" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-424, -441)" ;
+}
+variable  "F92" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-421, -443)" ;
+}
+variable  "F93" { // 2 values
+	type discrete[2] {  "No"  "Yes" };
+	property "position = (-428, -458)" ;
+}
+variable  "F94" { // 6 values
+	type discrete[6] {  "NA"  "No nucleoli"  "1 small"  "1 prominent (central)"  ">1 central"  ">1 peripheral" };
+	property "position = (-424, -467)" ;
+}
+variable  "F95" { // 5 values
+	type discrete[5] {  "NA"  "Clumped"  "Vesicular"  "Fine and delicate"  "Plasmacytoid" };
+	property "position = (-437, -465)" ;
+}
+variable  "F96" { // 4 values
+	type discrete[4] {  "NA"  "Other"  "LC"  "LNC" };
+	property "position = (-421, -465)" ;
+}
+variable  "F97" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-452, -466)" ;
+}
+variable  "F98" { // 5 values
+	type discrete[5] {  "NA"  "1-25%"  "25-75%"  "75-90%"  ">90%" };
+	property "position = (-450, -471)" ;
+}
+variable  "F99" { // 5 values
+	type discrete[5] {  "NA"  "Back to back"  "Closely packed"  "Separated"  "Far apart" };
+	property "position = (-454, -471)" ;
+}
+variable  "F100" { // 5 values
+	type discrete[5] {  "NA"  "Absent"  "Slight (1-15)"  "Moderate (16-30)"  "Marked (>30)" };
+	property "position = (-445, -467)" ;
+}
+variable  "F101" { // 8 values
+	type discrete[8] {  "NA"  "Some fusion"  "Form >4 nod in 4sqcm"  "Form 1-4 nod in 4sqcm"  "Most thick (>10 cells)"  "Most completely encircle"  "Most partially encircle"  "Most absent" };
+	property "position = (-458, -461)" ;
+}
+variable  "F102" { // 3 values
+	type discrete[3] {  "NA"  "Absent"  "Present" };
+	property "position = (-456, -459)" ;
+}
+variable  "F103" { // 4 values
+	type discrete[4] {  "NA"  "Almost all well def"  "Both well and poor def"  "Almost all poor def" };
+	property "position = (-458, -462)" ;
+}
+variable  "F104" { // 4 values
+	type discrete[4] {  "NA"  "0-20"  "21-50"  ">50" };
+	property "position = (-446, -465)" ;
+}
+variable  "F105" { // 3 values
+	type discrete[3] {  "NA"  "Absent"  "Present" };
+	property "position = (-453, -463)" ;
+}
+variable  "F106" { // 4 values
+	type discrete[4] {  "NA"  "Yes"  "Some similar"  "None similar" };
+	property "position = (-447, -463)" ;
+}
+variable  "F107" { // 3 values
+	type discrete[3] {  "NA"  "No"  "Yes" };
+	property "position = (-416, -461)" ;
+}
+variable  "F108" { // 2 values
+	type discrete[2] {  "Absent"  "Present" };
+	property "position = (-435, -438)" ;
+}
+probability (  "Fault" ) { // 1 variable(s) and 1 values
+	table 0.2 ;
+}
+probability (  "F1"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "F2"  "Fault"  "F97" ) { // 3 variable(s) and 6 values
+	table 1.0 0.0 0.0 0.99 0.0 0.01 ;
+}
+probability (  "F3"  "Fault"  "F97"  "F78" ) { // 4 variable(s) and 18 values
+	table 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.8 0.7 0.0 0.0 0.0 0.0 0.2 0.3 ;
+}
+probability (  "F4"  "Fault"  "F97" ) { // 3 variable(s) and 6 values
+	table 1.0 0.0 0.0 0.01 0.0 0.99 ;
+}
+probability (  "F5"  "Fault"  "F2"  "F97" ) { // 4 variable(s) and 24 values
+	table 1.0 1.0 1.0 0.0 1.0 0.0 0.0 0.0 0.0 0.999 0.0 0.99 0.0 0.0 0.0 0.0010 0.0 0.01 0.0 0.0 0.0 1.0E-4 0.0 0.0010 ;
+}
+probability (  "F6"  "Fault"  "F53" ) { // 3 variable(s) and 16 values
+	table 0.95 0.75 0.5 0.0 0.05 0.25 0.45 0.05 0.0 0.0 0.05 0.4 0.0 0.0 0.0010 0.55 ;
+}
+probability (  "F7"  "Fault" ) { // 2 variable(s) and 5 values
+	table 0.98 0.02 0.0010 0.0 0.0 ;
+}
+probability (  "F8"  "Fault"  "F53"  "F56" ) { // 4 variable(s) and 48 values
+	table 0.95 0.92 0.8 0.8 0.95 0.885 0.79 0.95 0.75 0.755 0.64 0.75 0.55 0.52 0.35 0.0 0.05 0.08 0.2 0.2 0.09 0.1 0.17 0.09 0.2 0.23 0.28 0.2 0.2 0.23 0.35 0.1 0.0 0.0050 0.0 0.0 0.01 0.015 0.04 0.01 0.05 0.015 0.08 0.05 0.25 0.25 0.3 0.9 ;
+}
+probability (  "F9"  "Fault" ) { // 2 variable(s) and 5 values
+	table 0.9 0.1 0.0010 0.0 0.0 ;
+}
+probability (  "F10"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "F11"  "Fault"  "F52" ) { // 3 variable(s) and 20 values
+	table 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "F12"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "F13"  "Fault"  "F8" ) { // 3 variable(s) and 9 values
+	table 1.0 1.0 1.0 0.0 1.0E-5 1.0E-4 0.0 0.0 0.0 ;
+}
+probability (  "F14"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "F15"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "F16"  "Fault"  "F15" ) { // 3 variable(s) and 6 values
+	table 0.5999 0.0 0.4 0.0 1.0E-4 0.0 ;
+}
+probability (  "F17"  "Fault" ) { // 2 variable(s) and 3 values
+	table 0.65 0.34 0.01 ;
+}
+probability (  "F18"  "Fault"  "F97"  "F17" ) { // 4 variable(s) and 24 values
+	table 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.999 0.998 0.0 0.0 0.0 0.0 0.0010 0.0020 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "F19"  "Fault" ) { // 2 variable(s) and 3 values
+	table 0.6 0.95 0.05 ;
+}
+probability (  "F20"  "Fault"  "F41"  "F44" ) { // 4 variable(s) and 16 values
+	table 1.0 1.0 0.9999 0.9995 0.0 0.0 1.0E-4 5.0E-4 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "F21"  "Fault"  "F90" ) { // 3 variable(s) and 12 values
+	table 0.95 0.95 0.95 0.95 0.05 0.05 0.05 0.05 0.0010 0.0010 0.0010 0.0010 ;
+}
+probability (  "F22"  "Fault"  "F21" ) { // 3 variable(s) and 9 values
+	table 1.0 0.0 0.0 0.0 0.999 0.99 0.0 0.0010 0.01 ;
+}
+probability (  "F23"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 1.0E-6 ;
+}
+probability (  "F24"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "F25"  "Fault" ) { // 2 variable(s) and 3 values
+	table 0.999 0.0010 0.0 ;
+}
+probability (  "F26"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "F27"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "F28"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.999 0.0010 ;
+}
+probability (  "F29"  "F92" ) { // 2 variable(s) and 4 values
+	table 0.9999 1.0E-4 1.0E-4 0.9999 ;
+}
+probability (  "F30"  "Fault"  "F98" ) { // 3 variable(s) and 30 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.43 0.86 0.99 1.0 0.0 0.5 0.094 0.01 0.0 0.0 0.01 0.0050 0.0 0.0 0.0 0.05 0.04 0.0 0.0 0.0 0.01 0.0010 0.0 0.0 ;
+}
+probability (  "F31"  "Fault"  "F20"  "F41"  "F44" ) { // 5 variable(s) and 32 values
+	table 0.9999 0.9999 0.9999 0.9999 0.0 0.0 0.999 0.999 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0E-4 1.0E-4 1.0E-4 1.0E-4 0.0 0.0 0.0010 0.0010 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "F32"  "Fault"  "F56" ) { // 3 variable(s) and 12 values
+	table 0.999 0.9 0.8 0.999 0.0010 0.09 0.18 0.0010 0.0 0.01 0.02 0.0 ;
+}
+probability (  "F33"  "Fault" ) { // 2 variable(s) and 5 values
+	table 0.999 0.0010 0.0 0.0 0.0 ;
+}
+probability (  "F34"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "F35"  "Fault" ) { // 2 variable(s) and 6 values
+	table 0.999 0.0010 0.0 0.0 0.0 0.0 ;
+}
+probability (  "F36"  "Fault" ) { // 2 variable(s) and 3 values
+	table 1.0 1.0E-5 0.0 ;
+}
+probability (  "F37"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "F38"  "Fault"  "F41"  "F96" ) { // 4 variable(s) and 40 values
+	table 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.05 0.1 0.0 0.0 0.0 0.0 0.0 0.0 0.94 0.9 1.0 0.0 0.0 0.0 0.0 0.0 0.0010 0.0010 0.0010 0.0 0.0 0.0 0.0 0.0 0.01 0.0 0.0 ;
+}
+probability (  "F39"  "Fault"  "F96"  "F84"  "F41" ) { // 5 variable(s) and 128 values
+	table 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.02 0.0 0.02 0.0 0.0 0.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.96 0.0 0.38 0.0 0.28 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.49 0.0 0.49 0.0 0.0 0.0 0.0 0.0 0.0010 0.0 0.0010 0.0 0.0010 0.0 0.0010 0.0 0.02 0.0 0.6 0.0 0.7 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.49 0.0 0.49 0.0 0.0 0.0 0.0 0.0 0.0010 0.0 0.0010 0.0 0.0010 0.0 0.0010 0.0 0.02 0.0 0.02 0.0 0.02 0.0 0.0 ;
+}
+probability (  "F40"  "Fault"  "F41"  "F96" ) { // 4 variable(s) and 64 values
+	table 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.9 0.0 0.94 0.0 0.0 0.0 0.0 0.0 0.09 0.37 0.04 0.0 0.0 0.0 0.0 0.0 0.01 0.6 0.01 0.0 0.0 0.0 0.0 0.0 0.0 0.01 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.02 0.01 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "F41"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.99 0.01 ;
+}
+probability (  "F42"  "Fault"  "F97" ) { // 3 variable(s) and 18 values
+	table 1.0 0.0 0.0 0.0010 0.0 0.3 0.0 0.0020 0.0 0.04 0.0 0.02 0.0 0.05 0.0 0.01 0.0 0.58 ;
+}
+probability (  "F43"  "Fault" ) { // 2 variable(s) and 3 values
+	table 0.9 0.1 0.0 ;
+}
+probability (  "F44"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.95 0.05 ;
+}
+probability (  "F45"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "F46"  "Fault" ) { // 2 variable(s) and 4 values
+	table 0.9 0.09 0.01 0.0 ;
+}
+probability (  "F47"  "Fault"  "F44" ) { // 3 variable(s) and 10 values
+	table 1.0 0.0 0.0 0.05 0.0 0.98 0.0 0.0010 0.0 0.01 ;
+}
+probability (  "F48"  "Fault"  "F44"  "F85" ) { // 4 variable(s) and 32 values
+	table 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.9 0.9 0.0 0.0 0.0 0.0 0.0 0.0 0.05 0.05 0.0 0.0 0.0 0.0 0.0 0.0 0.05 0.05 0.0 0.0 ;
+}
+probability (  "F49"  "Fault"  "F44" ) { // 3 variable(s) and 14 values
+	table 0.0 0.0 0.0 0.98 0.0 0.01 0.0 0.01 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "F50"  "Fault"  "F44" ) { // 3 variable(s) and 12 values
+	table 1.0 0.0 0.0 0.01 0.0 0.1 0.0 0.01 0.0 0.2 0.0 0.68 ;
+}
+probability (  "F51"  "Fault" ) { // 2 variable(s) and 4 values
+	table 0.2 0.3 0.5 0.0 ;
+}
+probability (  "F52"  "Fault"  "F55" ) { // 3 variable(s) and 16 values
+	table 0.9999 0.9999 0.0 0.0 1.0E-4 1.0E-4 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "F53"  "Fault" ) { // 2 variable(s) and 4 values
+	table 0.3 0.4 0.29 0.01 ;
+}
+probability (  "F54"  "Fault"  "F83" ) { // 3 variable(s) and 20 values
+	table 1.0 0.85 0.74 0.0 1.0 0.0 0.14 0.2 0.0 0.0 0.0 0.01 0.05 0.0 0.0 0.0 0.0010 0.01 0.0 0.0 ;
+}
+probability (  "F55"  "Fault" ) { // 2 variable(s) and 4 values
+	table 0.999 0.0010 0.0 0.0 ;
+}
+probability (  "F56"  "Fault" ) { // 2 variable(s) and 4 values
+	table 0.99 0.01 0.0010 0.0 ;
+}
+probability (  "F57"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "F58"  "Fault" ) { // 2 variable(s) and 3 values
+	table 0.7 0.3 1.0E-5 ;
+}
+probability (  "F59"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "F60"  "Fault" ) { // 2 variable(s) and 3 values
+	table 0.95 0.04 0.01 ;
+}
+probability (  "F61"  "Fault"  "F53" ) { // 3 variable(s) and 24 values
+	table 0.1 0.1 0.01 0.0050 0.7 0.7 0.35 0.25 0.19 0.19 0.59 0.65 0.01 0.01 0.05 0.05 0.0 0.0 0.0 1.0E-4 0.0 0.0 0.0 0.0 ;
+}
+probability (  "F62"  "Fault"  "F61" ) { // 3 variable(s) and 36 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.9695 0.9695 0.9695 0.9695 0.9695 0.0 0.01 0.01 0.01 0.01 0.01 0.0 0.01 0.01 0.01 0.01 0.01 0.0 5.0E-4 5.0E-4 5.0E-4 5.0E-4 5.0E-4 0.0 0.01 0.01 0.01 0.01 0.01 ;
+}
+probability (  "F63"  "Fault" ) { // 2 variable(s) and 5 values
+	table 1.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "F64"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "F65"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.98 0.02 ;
+}
+probability (  "F66"  "Fault"  "F61" ) { // 3 variable(s) and 12 values
+	table 1.0 1.0 0.999 0.99 0.98 0.96 0.0 1.0E-4 0.0010 0.01 0.02 0.04 ;
+}
+probability (  "F67"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "F68"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "F69"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "F70"  "Fault"  "F72"  "F86" ) { // 4 variable(s) and 32 values
+	table 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.98 0.98 0.0 0.0 0.0 0.0 0.0 0.0 0.01 0.01 0.0 0.0 0.0 0.0 0.0 0.0 0.01 0.01 0.0 0.0 ;
+}
+probability (  "F71"  "Fault"  "F72" ) { // 3 variable(s) and 16 values
+	table 1.0 0.0 0.0 0.83 0.0 0.15 0.0 0.02 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "F72"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.0 1.0 ;
+}
+probability (  "F73"  "Fault" ) { // 2 variable(s) and 5 values
+	table 0.99 0.01 0.0 0.0 0.0 ;
+}
+probability (  "F74"  "Fault"  "F30"  "F98" ) { // 4 variable(s) and 120 values
+	table 0.0 0.0 0.0 0.0 0.0 1.0 0.01 0.01 0.02 0.01 0.0 0.0 0.0 0.0 0.0 0.0 0.0010 0.0010 0.01 0.0 1.0 0.0010 0.0010 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.95 0.95 0.96 0.01 0.0 0.0 0.0 0.0 0.0 0.0 0.25 0.25 0.3 0.0 0.0 0.05 0.05 0.25 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.04 0.04 0.02 0.4 0.0 0.0 0.0 0.0 0.0 0.0 0.65 0.65 0.5 0.0 0.0 0.9 0.9 0.75 0.0 0.0 0.021 0.021 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.58 0.0 0.0 0.0 0.0 0.0 0.0 0.1 0.1 0.19 0.0 0.0 0.05 0.05 0.0 0.0 0.0 0.98 0.98 0.0 0.0 ;
+}
+probability (  "F75"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "F76"  "Fault" ) { // 2 variable(s) and 5 values
+	table 0.1 0.85 0.05 0.0 0.0 ;
+}
+probability (  "F77"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "F78"  "Fault"  "F97" ) { // 3 variable(s) and 6 values
+	table 1.0 0.0 0.0 0.65 0.0 0.35 ;
+}
+probability (  "F79"  "Fault" ) { // 2 variable(s) and 3 values
+	table 0.99 0.01 0.0 ;
+}
+probability (  "F80"  "Fault" ) { // 2 variable(s) and 2 values
+	table 1.0 0.0 ;
+}
+probability (  "F81"  "Fault"  "F72"  "F86" ) { // 4 variable(s) and 40 values
+	table 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.01 0.01 0.0 0.0 0.0 0.0 0.0 0.0 0.6 0.6 0.0 0.0 0.0 0.0 0.0 0.0 0.4 0.4 0.0 0.0 ;
+}
+probability (  "F82"  "Fault"  "F44"  "F85" ) { // 4 variable(s) and 40 values
+	table 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.999 0.999 0.0 0.0 0.0 0.0 0.0 0.0 0.0010 0.0010 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "F83"  "Fault"  "F41"  "F84" ) { // 4 variable(s) and 40 values
+	table 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.999 0.999 0.0 0.0 0.0 0.0 0.0 0.0 0.0010 0.0010 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "F84"  "Fault"  "F20"  "F41" ) { // 4 variable(s) and 32 values
+	table 1.0 1.0 1.0 0.01 1.0 0.0 1.0 0.0 0.0 0.0 0.0 0.99 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "F85"  "Fault"  "F20"  "F44" ) { // 4 variable(s) and 32 values
+	table 1.0 1.0 1.0 0.5 1.0 0.0 1.0 0.0 0.0 0.0 0.0 0.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "F86"  "F20"  "F85"  "F84"  "F72" ) { // 5 variable(s) and 512 values
+	table 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 1.0 0.2 1.0 0.0 1.0 0.0 1.0 0.05 1.0 0.01 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.2 1.0 0.0 1.0 0.0 1.0 0.0010 1.0 0.05 1.0 0.0 1.0 0.0010 1.0 0.0010 1.0 0.01 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.3 1.0 0.0 1.0 0.0 1.0 0.01 1.0 0.1 1.0 0.0 1.0 0.0 1.0 0.0010 1.0 0.0010 1.0 0.0010 1.0 0.0010 1.0 0.0010 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.8 0.0 0.0 0.0 0.0 0.0 0.95 0.0 0.99 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.1 0.0 0.0 0.0 0.0 0.0 0.01 0.0 0.05 0.0 0.0 0.0 0.01 0.0 0.01 0.0 0.05 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.99 0.0 0.7 0.0 0.0 0.0 0.0 0.0 0.89 0.0 0.8 0.0 0.02 0.0 0.0010 0.0 0.01 0.0 0.999 0.0 0.05 0.0 0.1 0.0 0.999 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 1.0 0.0 0.7 0.0 0.0 0.0 1.0 0.0 0.99 0.0 0.9 0.0 0.0 0.0 0.99 0.0 0.99 0.0 0.94 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.6 0.0 0.01 0.0 0.0010 0.0 0.01 0.0 0.2 0.0 0.1 0.0 0.1 0.0 0.03 0.0 0.1 0.0 0.99 0.0 0.0 0.0 0.95 0.0 0.9 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.4 0.0 0.0010 0.0 0.0 0.0 0.99 0.0 0.8 0.0 0.0 0.0 0.0 0.0 0.95 0.0 0.9 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "F87"  "Fault"  "F31"  "F41" ) { // 4 variable(s) and 8 values
+	table 1.0 1.0 1.0 0.1 0.0 0.0 0.0 0.9 ;
+}
+probability (  "F88"  "Fault"  "F31"  "F44" ) { // 4 variable(s) and 8 values
+	table 1.0 1.0 1.0 0.2 0.0 0.0 0.0 0.8 ;
+}
+probability (  "F89"  "Fault"  "F88"  "F87"  "F31"  "F72" ) { // 6 variable(s) and 32 values
+	table 1.0 1.0 1.0 0.0 0.0 1.0 1.0 0.8 0.0 1.0 1.0 0.05 0.0 1.0 1.0 0.01 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.2 0.0 0.0 0.0 0.95 0.0 0.0 0.0 0.99 ;
+}
+probability (  "F90"  "Fault" ) { // 2 variable(s) and 4 values
+	table 0.8 0.19 0.01 0.0010 ;
+}
+probability (  "F91"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.99 0.01 ;
+}
+probability (  "F92"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.0 1.0 ;
+}
+probability (  "F93"  "Fault"  "F83"  "F82" ) { // 4 variable(s) and 50 values
+	table 1.0 1.0 1.0 0.0 0.0 1.0 1.0 1.0 0.0 0.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 0.0 0.0 0.0 1.0 1.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 ;
+}
+probability (  "F94"  "Fault"  "F41"  "F96" ) { // 4 variable(s) and 48 values
+	table 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0010 0.9 0.0 0.0 0.0 0.0 0.0 0.0 0.05 0.05 0.05 0.0 0.0 0.0 0.0 0.0 0.2 0.0 0.0010 0.0 0.0 0.0 0.0 0.0 0.74 0.0 0.01 0.0 0.0 0.0 0.0 0.0 0.01 0.05 0.94 ;
+}
+probability (  "F95"  "Fault"  "F72" ) { // 3 variable(s) and 10 values
+	table 1.0 0.0 0.0 0.99 0.0 0.0 0.0 0.0 0.0 0.01 ;
+}
+probability (  "F96"  "Fault"  "F41"  "F84" ) { // 4 variable(s) and 32 values
+	table 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.01 0.01 0.0 0.0 0.0 0.0 0.0 0.0 0.09 0.09 0.0 0.0 0.0 0.0 0.0 0.0 0.9 0.9 0.0 0.0 ;
+}
+probability (  "F97"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.0 1.0 ;
+}
+probability (  "F98"  "Fault"  "F97" ) { // 3 variable(s) and 10 values
+	table 1.0 0.0 0.0 0.01 0.0 0.3 0.0 0.64 0.0 0.05 ;
+}
+probability (  "F99"  "Fault"  "F98" ) { // 3 variable(s) and 25 values
+	table 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.01 0.02 0.1 0.0 0.01 0.05 0.2 0.8 0.0 0.5 0.45 0.6 0.05 0.0 0.49 0.49 0.18 0.05 ;
+}
+probability (  "F100"  "Fault"  "F97"  "F4" ) { // 4 variable(s) and 30 values
+	table 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.94 0.88 0.0 0.0 0.0 0.0 0.03 0.06 0.0 0.0 0.0 0.0 0.02 0.04 0.0 0.0 0.0 0.0 0.01 0.02 ;
+}
+probability (  "F101"  "Fault"  "F105" ) { // 3 variable(s) and 24 values
+	table 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.05 0.0 0.0 0.05 0.0 0.0 0.9 ;
+}
+probability (  "F102"  "Fault"  "F105" ) { // 3 variable(s) and 9 values
+	table 1.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 ;
+}
+probability (  "F103"  "Fault"  "F97" ) { // 3 variable(s) and 8 values
+	table 1.0 0.0 0.0 0.75 0.0 0.23 0.0 0.02 ;
+}
+probability (  "F104"  "Fault"  "F97" ) { // 3 variable(s) and 8 values
+	table 1.0 0.0 0.0 0.05 0.0 0.15 0.0 0.8 ;
+}
+probability (  "F105"  "Fault"  "F97" ) { // 3 variable(s) and 6 values
+	table 1.0 0.0 0.0 0.95 0.0 0.05 ;
+}
+probability (  "F106"  "Fault"  "F97" ) { // 3 variable(s) and 8 values
+	table 1.0 0.0 0.0 0.0 0.0 0.1 0.0 0.9 ;
+}
+probability (  "F107"  "Fault"  "F41"  "F44" ) { // 4 variable(s) and 12 values
+	table 1.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 ;
+}
+probability (  "F108"  "Fault" ) { // 2 variable(s) and 2 values
+	table 0.5 0.5 ;
+}

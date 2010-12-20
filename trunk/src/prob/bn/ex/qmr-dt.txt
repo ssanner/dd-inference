@@ -1,0 +1,101 @@
+http://www.globe.to/~oka326/archive/BNET/bnet-usage-en.html
+
+QMR
+===
+
+Bayes nets originally arose out of an attempt to add probabilities to
+expert systems, and this is still the most common use for BNs. A
+famous example is QMR-DT, a decision-theoretic reformulation of the
+Quick Medical Reference (QMR) model.
+
+ 
+Here, the top layer represents hidden disease nodes, and the bottom
+layer represents observed symptom nodes. The goal is to infer the
+posterior probability of each disease given all the symptoms (which
+can be present, absent or unknown). Each node in the top layer has a
+Bernoulli prior (with a low prior probability that the disease is
+present). Since each node in the bottom layer has a high fan-in, we
+use a noisy-OR parameterization; each disease has an independent
+chance of causing each symptom. The real QMR-DT model is copyright,
+but we can create a random QMR-like model as follows.
+
+function bnet = mk_qmr_bnet(G, inhibit, leak, prior)
+% MK_QMR_BNET Make a QMR model
+% bnet = mk_qmr_bnet(G, inhibit, leak, prior)
+%
+% G(i,j) = 1 iff there is an arc from disease i to finding j
+% inhibit(i,j) = inhibition probability on i->j arc
+% leak(j) = inhibition prob. on leak->j arc
+% prior(i) = prob. disease i is on
+
+[Ndiseases Nfindings] = size(inhibit);
+N = Ndiseases + Nfindings;
+finding_node = Ndiseases+1:N;
+ns = 2*ones(1,N);
+dag = zeros(N,N);
+dag(1:Ndiseases, finding_node) = G;
+bnet = mk_bnet(dag, ns);
+
+for d=1:Ndiseases
+  CPT = [1-prior(d) prior(d)];
+  bnet.CPD{d} = tabular_CPD(bnet, d, CPT');
+end
+
+for i=1:Nfindings
+  fnode = finding_node(i);
+  ps = parents(G, i);
+  bnet.CPD{fnode} = noisyor_CPD(bnet, fnode, leak(i), inhibit(ps, i));
+end
+
+In the file BNT/examples/static/qmr1, we create a random bipartite
+graph G, with 5 diseases and 10 findings, and random parameters. (In
+general, to create a random dag, use 'mk_random_dag'.) We can
+visualize the resulting graph structure using the methods discussed
+below, with the following results: 
+
+Now let us put some random evidence on all the leaves except the very
+first and very last, and compute the disease posteriors.
+
+pos = 2:floor(Nfindings/2);
+neg = (pos(end)+1):(Nfindings-1);
+onodes = myunion(pos, neg);
+evidence = cell(1, N);
+evidence(findings(pos)) = num2cell(repmat(2, 1, length(pos)));
+evidence(findings(neg)) = num2cell(repmat(1, 1, length(neg)));
+
+engine = jtree_inf_engine(bnet, onodes);
+[engine, ll] = enter_evidence(engine, evidence);
+post = zeros(1, Ndiseases);
+for i=diseases(:)'
+  m = marginal_nodes(engine, i);
+  post(i) = m.T(2);
+end
+
+Junction tree can be quite slow on large QMR models. Fortunately, it
+is possible to exploit properties of the noisy-OR function to speed up
+exact inference using an algorithm called quickscore, discussed below.
+
+
+Quickscore
+==========
+
+The junction tree algorithm is quite slow on the QMR network, since
+the cliques are so big. One simple trick we can use is to notice that
+hidden leaves do not affect the posteriors on the roots, and hence do
+not need to be included in the network. A second trick is to notice
+that the negative findings can be "absorbed" into the prior: see the
+file BNT/examples/static/mk_minimal_qmr_bnet for details.  A much more
+significant speedup is obtained by exploiting special properties of
+the noisy-or node, as done by the quickscore algorithm. For details,
+see
+
+Heckerman, "A tractable inference algorithm for diagnosing multiple diseases", UAI 89. 
+Rish and Dechter, "On the impact of causal independence", UCI tech report, 1998. 
+
+This has been implemented in BNT as a special-purpose inference
+engine, which can be created and used as follows:
+
+engine = quickscore_inf_engine(inhibit, leak, prior);
+engine = enter_evidence(engine, pos, neg);
+m = marginal_nodes(engine, i);
+

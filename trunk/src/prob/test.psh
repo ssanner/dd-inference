@@ -1,0 +1,36 @@
+echo on
+setenv DEBUG "FALSE"
+setenv BN_FILENAME "./bn/ex/Test.bif"
+setenv PRUNE_PREC "0.01"
+setenv PRUNE_TYPE "none"
+setenv DD_TYPE "ADD"
+load
+
+// Note: This is a bad interface, need to use direct command line
+//       conditional probability specification, e.g. P(BP | MINVOL:NORMAL, ...)
+
+// Query #1
+setenv A "ignore"
+setenv B "ignore"
+setenv C "query"
+timer start
+query
+timer stop
+
+// Query #2
+setenv A "assign:T"
+setenv B "ignore"
+setenv C "query"
+timer start
+query
+timer stop
+
+// Query #3
+setenv A "assign:T"
+setenv B "assign:F"
+setenv C "query"
+timer start
+query
+timer stop
+
+exit

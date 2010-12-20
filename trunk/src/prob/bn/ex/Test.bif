@@ -1,0 +1,26 @@
+network Test {
+  property Source = "Scott Sanner - Test network"
+}
+variable A {
+  type discrete [ 2 ] { F, T };
+}
+variable B {
+  type discrete [ 2 ] { F, T };
+}
+variable C {
+  type discrete [ 2 ] { F, T };
+}
+probability ( A ) {
+  table 0.5, 0.5;
+}
+probability ( B ) {
+  table 0.5, 0.5;
+}
+probability ( C | A B ) {
+ (F, F) 0.9 0.1;
+ (F, T) 0.8 0.2;
+ (T, F) 0.7 0.3;
+ (T, T) 0.6 0.4;
+}
+
+

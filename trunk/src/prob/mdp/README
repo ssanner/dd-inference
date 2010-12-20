@@ -1,0 +1,6 @@
+
+For highest efficiency, make sure logic/add/DD.GC_DURING_FLUSH is false.
+
+If node explosion seems to occur for AADD (e.g. on factory#.dat problems,
+set logic/add/AADD.USE_NODE_MERGING to true (and make clean; make).
+

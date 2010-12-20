@@ -1,0 +1,2 @@
+
+prob.PShell creates the BN.  To simply view it, run prob.bn.parser.IR on the filename.

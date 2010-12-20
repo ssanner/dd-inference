@@ -1,0 +1,46 @@
+echo on
+setenv DEBUG "FALSE"
+setenv BN_FILENAME "./bn/ex/Alarm_JB.bif"
+setenv PRUNE_PREC "-1"
+setenv PRUNE_TYPE "none"
+// DD_TYPE can be TABLE, ADD, AADD
+setenv DD_TYPE "TABLE"
+timer start
+load
+timer stop
+
+// Note: This is a bad interface, need to use direct command line
+//       conditional probability specification, e.g. P(BP | MINVOL:NORMAL, ...)
+
+// Query #1
+setenv BP "query"
+timer start
+query
+timer stop
+
+// Query #2
+setenv BP "query"
+setenv TPR "query"
+setenv ERRLOWOUTPUT "assign:TRUE"
+setenv PVSAT "assign:HIGH"
+setenv LVFAILURE "assign:TRUE"
+timer start
+query
+timer stop
+
+// Query #3
+setenv BP "ignore"
+setenv TPR "ignore"
+setenv ERRLOWOUTPUT "ignore"
+setenv FIO2 "query"
+setenv MINVOL "query"
+setenv VENTALV "query"
+setenv KINKEDTUBE "assign:TRUE"
+setenv PVSAT "assign:HIGH"
+setenv LVFAILURE "assign:TRUE"
+setenv ANAPHYLAXIS "assign:TRUE"
+timer start
+query
+timer stop
+
+quit
