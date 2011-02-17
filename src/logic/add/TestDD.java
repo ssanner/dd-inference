@@ -7,6 +7,8 @@ package logic.add;
 import java.math.*;
 import java.util.*;
 
+import graph.Graph;
+
 public class TestDD {
 
     public static ArrayList tree;
@@ -46,11 +48,10 @@ public class TestDD {
 
 	// Perform each test
 	testDD(DD.TYPE_TABLE);
-	testDD(DD.TYPE_ADD);
-	testDD(DD.TYPE_AADD);
+//	testDD(DD.TYPE_ADD);
+//	testDD(DD.TYPE_AADD);
     }
 
-    // This tests the binary operations
     public static void testDD(int type) {
 
 	System.out.println("\nPerforming DD test 1:\n-----------------------\n");
@@ -102,6 +103,8 @@ public class TestDD {
 	a.addSpecialNode(a5);
 	System.out.println("\nDD_5 = DD_1 + DD_4:\n" + a.printNode(a5));
 	DD.PrintEnum(a,a5);
+	
+
 
 	// Apply the SUM op once more
 	a.flushCaches(true);
@@ -141,10 +144,25 @@ public class TestDD {
 	System.out.println("\nDD_12 = BUILD ORDER:\n" + a.printNode(a12));
 	DD.PrintEnum(a,a12);
 
+	//Graph g1 = a.getGraph(a12);
+//	g1.launchViewer(1300, 770);
+	
 	// Test buildDD (ordered)
 	int a13 = a.buildDDFromUnorderedTree(tree, var2ID);
 	System.out.println("\nDD_13 = BUILD UNORDER:\n" + a.printNode(a13));
 	DD.PrintEnum(a,a13);
-	a.pruneReport();	
+	a.pruneReport();
+	
+	int a14 = a.applyInt(a12, a12, DD.ARITH_PROD);
+	int a15 = a.applyInt(a14, a12, DD.ARITH_DIV);
+	
+	Graph g1 = a.getGraph(a12);
+	g1.launchViewer(1300, 770);
+	
+	Graph g2 = a.getGraph(a15);
+	g2.launchViewer(1300, 770);
+	
     }
+    
+    
 }

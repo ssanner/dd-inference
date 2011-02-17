@@ -42,6 +42,8 @@ public abstract class DD {
     public final static int TYPE_TABLE = 0;
     public final static int TYPE_ADD   = 1;
     public final static int TYPE_AADD  = 2;
+    public final static int TYPE_LAADD  = 3;
+
 
     // Boolean/Arithmetic operation codes
     public static final int LOG_AND       = 10;
