@@ -49,6 +49,9 @@ public class FBR {
 	case DD.TYPE_AADD: {
 	    _context = new AADD(order);
 	} break;
+	case DD.TYPE_LAADD: {
+	    _context = new LAADD(order);
+	} break;
 	default: {
 	    System.out.println("FBR.Initialize: Illegal TYPE");
 	    System.exit(1);
