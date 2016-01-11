@@ -436,6 +436,7 @@ public class Graph {
 	           StringBuilder sb = new StringBuilder();
 	           String line = null;
 	           while ((line = process_out.readLine()) != null) {
+	        	  line = line.replaceAll("(\\d+\\.\\d+)", "\"$1\"");
 	               sb.append(line + "\n");
 	           }
 	           process_out.close();
