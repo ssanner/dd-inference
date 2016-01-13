@@ -12,8 +12,6 @@ timer stop
 // Display Bayes net DAG and print BN statistics
 viz
 print
-viz MINVOLSET
-print MINVOLSET
 viz BP
 print BP
 

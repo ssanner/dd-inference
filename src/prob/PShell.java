@@ -351,15 +351,15 @@ public class PShell {
 					DD.ResetTimer();
 					// int tw = ((Integer)_bn.query(query_var, assign_var, /*
 					// do_calc */ false)).intValue();
-					Object cpt = _bn.query(query_var, assign_var, /* do calc */
-							true);
+					Object cpt = _bn.query(query_var, assign_var);
+					//Object cptOrig = _bn.queryOrig(query_var, assign_var, /* do calc */ true);
 					// System.out.println("\nResults for query:" + query_var +
 					// ", " + assign_var);
 					// System.out.println("\nCPT:\n" +
 					// _bn._context.printNode(cpt) + "\n");
 					printProbTable(query_var, assign_var, cpt);
-					System.out
-							.println("\nTime: " + DD.GetElapsedTime()
+					//printProbTable(query_var, assign_var, cptOrig);
+					System.out.println("\nTime: " + DD.GetElapsedTime()
 									+ " ms, Size: "
 									+ _bn._context.countExactNodes(cpt) /*
 																		 * +

@@ -139,16 +139,16 @@ public class BNTest {
 			String aval = (String) assignments.get(assign_val_id);
 			assignment.put(avar, aval);
 
-			// Run query
-			if (max_tw >= 0) {
-				int tw = ((Integer) bn.query(query_var, assignment, false))
-						.intValue();
-				if (tw > max_tw) {
-					System.out.println("Skipping query: " + tw);
-					--i; // Repeat iteration
-					continue;
-				}
-			}
+//			// Run query
+//			if (max_tw >= 0) {
+//				int tw = ((Integer) bn.query(query_var, assignment, false))
+//						.intValue();
+//				if (tw > max_tw) {
+//					System.out.println("Skipping query: " + tw);
+//					--i; // Repeat iteration
+//					continue;
+//				}
+//			}
 			DD.ResetTimer();
 			System.out.println("Running query: " + query_var + " | "
 					+ assignment + " ->");

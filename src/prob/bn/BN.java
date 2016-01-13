@@ -454,6 +454,10 @@ public class BN {
 		flushCaches(null, null);
 	}
 
+	public void flushCaches(ArrayList factor_list_1) {
+		flushCaches(factor_list_1, null);
+	}
+	
 	public void flushCaches(ArrayList factor_list_1, ArrayList factor_list_2) {
 		if (!ALWAYS_FLUSH
 				&& ((double) RUNTIME.freeMemory() / (double) RUNTIME
@@ -484,15 +488,7 @@ public class BN {
 	// Generic BN Inference Methods
 	// ///////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * Performs translation from internal to external, use do_calc=false to
-	 * determine binary tree width of query.
-	 **/
 	public Object query(Set query_vars, Map assign_vars) {
-		return query(query_vars, assign_vars, true);
-	}
-
-	public Object query(Set query_vars, Map assign_vars, boolean do_calc) {
 
 		// Build mapping from query/assign vars to binary version
 		ArrayList factors = new ArrayList();
@@ -597,13 +593,13 @@ public class BN {
 		// TODO: Translate the resulting CPT
 
 		// Call the varElim algorithm and return
-		return varElim(factors, operations, do_calc);
+		return varElim(factors, operations);
 	}
 
 	/**
 	 * Internal inference method - variable references are binary
 	 **/
-	public Object varElim(ArrayList factors, HashMap operations, boolean do_calc) {
+	public Object varElim(ArrayList factors, HashMap operations) {
 
 		// TODO: Go through all buckets in order...
 		// 1) Multiply all DDs
@@ -613,181 +609,51 @@ public class BN {
 		//
 		// Return DD once last bucket reached
 
-		System.out.println("\nRunning variable elimination");
-		int max_var_width = -1;
+		System.out.println("\nRunning variable elimination:\n\nVariable order: " + _alPropOrder + "\n\nFactors: " + factors);
+		
+		return null;
+	}
 
-		// System.out.println("Start factors: " + factors);
-		// System.out.println(operations + "\n\n");
-		int i, j, k;
-		ArrayList query_vars = new ArrayList();
-		ArrayList contains_factor = new ArrayList();
-		ArrayList not_contains_factor = new ArrayList();
-		for (i = 0; i < _alPropOrder.size(); i++) {
-
-			// A little inefficient to use Strings, but probably
-			// nothing compared to the DD operations.
-			String var = (String) _alPropOrder.get(i);
-
-			// Separate out factors into those containing and not
-			// containing var.
-			contains_factor.clear();
-			not_contains_factor.clear();
-			for (j = 0; j < factors.size(); j++) {
-
-				Factor f = (Factor) factors.get(j);
-				if (f._hsVars.contains(var)) {
-					contains_factor.add(f);
-				} else {
-					not_contains_factor.add(f);
-				}
-			}
-
-			if (contains_factor.isEmpty()) {
-				continue;
-			}
-
-			System.out.print("- Initial factor for " + var + "...");
-
-			// Multiply all factors with var -> dd
-			Factor f1 = (Factor) contains_factor.get(0);
-			Object dd = f1._dd;
-			HashSet new_vars = (HashSet) f1._hsVars.clone();
-			for (k = 1; k < contains_factor.size(); k++) {
-				Factor f2 = (Factor) contains_factor.get(k);
-				new_vars.addAll(f2._hsVars);
-				if (do_calc) {
-					dd = _context.applyInt(dd, f2._dd, DD.ARITH_PROD); // calc
-				}
-
-				// Prune?
-				// if (_context.PRUNE_TYPE != DD.NO_REPLACE) {
-				// _context.pruneNodes(dd);
-				// }
-
-				// Cache maintenance
-				int ref = addSaveNode(dd);
-				flushCaches(contains_factor, not_contains_factor);
-				removeSaveNode(ref);
-			}
-
-			System.out.println(_context.countExactNodes(dd) + " nodes, "
-					+ _context.getGIDs(dd).size() + " bin vars / "
-					+ new_vars.size() + " prop vars, " + MemDisplay());
-
-			// Perform any required operations on this var (i.e. restrict/sum
-			// out)
-			int cnt = getVarCount(var);
-			boolean query = false;
-			for (k = 0; k < cnt; k++) {
-				Var bvar = getVar(var, k);
-				String op = (String) operations.get(bvar);
-				System.out.print("- Performing " + bvar + "->" + op);
-				if (do_calc) {
-					if (op == SUM_OUT) {
-						dd = _context.opOut(dd, bvar._nID, DD.ARITH_SUM); // Calc
-					} else if (op == RESTRICT_TRUE) {
-						dd = _context.restrict(dd, bvar._nID, DD.RESTRICT_HIGH); // Calc
-					} else if (op == RESTRICT_FALSE) {
-						dd = _context.restrict(dd, bvar._nID, DD.RESTRICT_LOW); // Calc
-					} else if (op == QUERY) {
-						query = true;
-						query_vars.add(bvar);
-					} else {
-						System.out.println("Invalid op: " + op);
-						System.exit(1);
-					}
-				}
-
-				// Prune?
-				// if (op != QUERY && _context.PRUNE_TYPE != DD.NO_REPLACE) {
-				// _context.pruneNodes(dd);
-				// }
-
-				// Cache maintenance
-				int ref = addSaveNode(dd);
-				flushCaches(contains_factor, not_contains_factor);
-				removeSaveNode(ref);
-
-				// Screen output
-				List bin_vars = getVarsFromIDs(_context.getGIDs(dd));
-				System.out.println("..." + _context.countExactNodes(dd)
-						+ " nodes, " + bin_vars.size() + " bin vars / "
-						+ new_vars.size() + " prop vars, " + MemDisplay());
-				if (new_vars.size() > max_var_width) {
-					max_var_width = new_vars.size();
-				}
-
-				// Make sure all bin_vars in dd are among the prop vars that
-				// should
-				// be in the new factor.
-				if (do_calc) {
-					Iterator bvi = bin_vars.iterator();
-					while (bvi.hasNext()) {
-						String bvs = ((Var) bvi.next())._sName;
-						Iterator nvi = new_vars.iterator();
-						boolean found = false;
-						while (!found && nvi.hasNext()) {
-							found = (bvs.equals(nvi.next()));
-						}
-						if (!found) {
-							System.out.println("ERROR: " + bvs
-									+ " not found among prop vars!");
-							System.out.println("Bin vars: " + bin_vars);
-							System.out.println("Prop vars: " + new_vars);
-							System.exit(1);
-						}
-					}
-				}
-			}
-
-			// Make new result
-			if (!query) {
-				new_vars.remove(var); // Factor should not contain var
-			}
-
-			// Add the resulting factor back in
-			not_contains_factor.add(new Factor(dd, new_vars));
-			factors = (ArrayList) not_contains_factor.clone();
-			// System.out.println("Interm factors: " + factors);
-		}
-
-		// System.out.println("Result factors: " + factors);
-
-		// Multiply out any remaining factors
-		Object dd = ((Factor) factors.get(0))._dd;
-		for (j = 1; j < factors.size(); j++) {
-			dd = _context.applyInt(dd, ((Factor) factors.get(j))._dd,
-					DD.ARITH_PROD);
-
-			// Prune?
-			// if (_context.PRUNE_TYPE != DD.NO_REPLACE) {
-			// _context.pruneNodes(dd);
-			// }
-
-			// Cache maintenance
+	public Factor multiplyFactors(ArrayList factors) {
+		Factor f1 = (Factor) factors.get(0);
+		Object dd = f1._dd;
+		HashSet new_vars = (HashSet) f1._hsVars.clone();
+		for (int k = 1; k < factors.size(); k++) {
+			Factor f2 = (Factor) factors.get(k);
+			new_vars.addAll(f2._hsVars);
+			dd = _context.applyInt(dd, f2._dd, DD.ARITH_PROD); 
+			
+			// Cache maintenance -- is this safe?
 			int ref = addSaveNode(dd);
 			flushCaches();
 			removeSaveNode(ref);
 		}
 
-		// If not doing calculations, just return tree width of query
-		if (!do_calc) {
-			return new Integer(max_var_width);
-		}
+		return new Factor(dd, new_vars);
+	}
 
-		// Normalize the result (Need P(Q|E), have P(Q^E), compute P(Q^E)/(sum_Q
-		// P(Q^E))
-		double norm_const = 1d;
+	public Factor marginalizeFactor(Factor f, String var) {
+		Object dd = f._dd;
+		return null;	
+	}
+
+	public Factor restrictFactor(Factor f, String var, String value) {
+		Object dd = f._dd;
+		return null;
+	}
+
+	public Factor normalizeFactor(Factor f) {
+		// Normalize the result (Need P(Q|E), have P(Q^E), compute P(Q^E)/(sum_Q P(Q^E))
 
 		// Determine sum vars
-		Object sum_dd = dd;
-		Iterator sum_vars = query_vars.iterator();
+		Object sum_dd = f._dd;
+		Iterator sum_vars = f._hsVars.iterator();
 		while (sum_vars.hasNext()) {
 			Var bvar = (Var) sum_vars.next();
 			sum_dd = _context.opOut(sum_dd, bvar._nID, DD.ARITH_SUM);
 
-			// Cache maintenance
-			int ref1 = addSaveNode(dd);
+			// Cache maintenance -- is this safe?
+			int ref1 = addSaveNode(f._dd);
 			int ref2 = addSaveNode(sum_dd);
 			flushCaches();
 			removeSaveNode(ref2);
@@ -797,31 +663,13 @@ public class BN {
 			System.out.println("Sum did not yield a constant!\n" + sum_dd);
 			System.exit(1);
 		}
-
-		// Normalization with ranges [min, max] requires division by the
-		// opposite to maintain
-		// [min, max] property.
-		if (DD.PRUNE_TYPE == DD.REPLACE_RANGE) {
-			System.out.println("Range normalization not currently implemented");
-			System.exit(1);
-		} else {
-			double sum_dd_val = _context.getMaxValue(sum_dd);
-			// System.out.println("Sum: " + _df.format(sum_dd_val));
-			if (sum_dd_val == 0) {
-				dd = _context.getConstantNode(0d);
-			} else {
-				dd = _context.scalarMultiply(dd, 1d / sum_dd_val);
-			}
-		}
-
-		// Cache maintenance
-		int ref = addSaveNode(dd);
-		flushCaches();
-		removeSaveNode(ref);
-
-		return dd;
+		double norm_const = _context.getMaxValue(sum_dd);
+		Object norm_dd = _context.scalarMultiply(f._dd, 1d / norm_const);
+		Factor new_f = new Factor(norm_dd, f._hsVars);
+		
+		return new_f;
 	}
-
+	
 	public class Factor {
 		public Object _dd;
 		public HashSet _hsVars;
@@ -832,7 +680,7 @@ public class BN {
 		}
 
 		public String toString() {
-			return " " + _hsVars + "::" + _context.getGIDs(_dd) + " ";
+			return "Factor( " + _hsVars + "::" + _context.getGIDs(_dd) + " )";
 		}
 	}
 
