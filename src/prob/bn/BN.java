@@ -505,7 +505,6 @@ public class BN {
 			Map.Entry me = (Map.Entry) i.next();
 			String avar = (String) me.getKey();
 
-			// TODO: Get dsep analysis to work!
 			// Check dsep of this evidence var against all query vars
 			if (false && isDSeparated(avar, new HashSet(query_vars),
 					assign_vars.keySet())) {
