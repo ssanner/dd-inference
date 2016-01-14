@@ -352,20 +352,20 @@ public class PShell {
 					// int tw = ((Integer)_bn.query(query_var, assign_var, /*
 					// do_calc */ false)).intValue();
 					Object cpt = _bn.query(query_var, assign_var);
-					//Object cptOrig = _bn.queryOrig(query_var, assign_var, /* do calc */ true);
+					Object cptOrig = _bn.queryOrig(query_var, assign_var, /* do calc */ true);
 					// System.out.println("\nResults for query:" + query_var +
 					// ", " + assign_var);
 					// System.out.println("\nCPT:\n" +
 					// _bn._context.printNode(cpt) + "\n");
-					printProbTable(query_var, assign_var, cpt);
-					//printProbTable(query_var, assign_var, cptOrig);
+					System.out.println("\nREFERENCE IMPLEMENTATION:");
+					printProbTable(query_var, assign_var, cptOrig);
+					System.out.println("\nASSIGNMENT 4, Q4 RESULT:");
+					if (cpt != null)
+						printProbTable(query_var, assign_var, cpt);
+					else
+						System.out.println("  - null");
 					System.out.println("\nTime: " + DD.GetElapsedTime()
-									+ " ms, Size: "
-									+ _bn._context.countExactNodes(cpt) /*
-																		 * +
-																		 * " nodes, TW: "
-																		 * + tw
-																		 */);
+									+ " ms, Size: "	+ _bn._context.countExactNodes(cptOrig));
 				}
 			}
 

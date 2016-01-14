@@ -488,7 +488,15 @@ public class BN {
 	// Generic BN Inference Methods
 	// ///////////////////////////////////////////////////////////////////////////
 
-	public Object query(Set query_vars, Map assign_vars) {
+	/**
+	 * Performs translation from internal to external, use do_calc=false to
+	 * determine binary tree width of query.
+	 **/
+	public Object queryOrig(Set query_vars, Map assign_vars) {
+		return queryOrig(query_vars, assign_vars, true);
+	}
+
+	public Object queryOrig(Set query_vars, Map assign_vars, boolean do_calc) {
 
 		// Build mapping from query/assign vars to binary version
 		ArrayList factors = new ArrayList();
@@ -589,17 +597,14 @@ public class BN {
 			}
 		}
 
-		// TODO: Approximation
-		// TODO: Translate the resulting CPT
-
 		// Call the varElim algorithm and return
-		return varElim(factors, operations);
+		return varElimOrig(factors, operations, do_calc);
 	}
 
 	/**
 	 * Internal inference method - variable references are binary
 	 **/
-	public Object varElim(ArrayList factors, HashMap operations) {
+	public Object varElimOrig(ArrayList factors, HashMap operations, boolean do_calc) {
 
 		// TODO: Go through all buckets in order...
 		// 1) Multiply all DDs
@@ -609,12 +614,292 @@ public class BN {
 		//
 		// Return DD once last bucket reached
 
+		System.out.println("\nRunning variable elimination");
+		int max_var_width = -1;
+
+		// System.out.println("Start factors: " + factors);
+		// System.out.println(operations + "\n\n");
+		int i, j, k;
+		ArrayList query_vars = new ArrayList();
+		ArrayList contains_factor = new ArrayList();
+		ArrayList not_contains_factor = new ArrayList();
+		for (i = 0; i < _alPropOrder.size(); i++) {
+
+			// A little inefficient to use Strings, but probably
+			// nothing compared to the DD operations.
+			String var = (String) _alPropOrder.get(i);
+
+			// Separate out factors into those containing and not
+			// containing var.
+			contains_factor.clear();
+			not_contains_factor.clear();
+			for (j = 0; j < factors.size(); j++) {
+
+				Factor f = (Factor) factors.get(j);
+				if (f._hsVars.contains(var)) {
+					contains_factor.add(f);
+				} else {
+					not_contains_factor.add(f);
+				}
+			}
+
+			if (contains_factor.isEmpty()) {
+				continue;
+			}
+
+			System.out.print("- Initial factor for " + var + "...");
+
+			// Multiply all factors with var -> dd
+			Factor f1 = (Factor) contains_factor.get(0);
+			Object dd = f1._dd;
+			HashSet new_vars = (HashSet) f1._hsVars.clone();
+			for (k = 1; k < contains_factor.size(); k++) {
+				Factor f2 = (Factor) contains_factor.get(k);
+				new_vars.addAll(f2._hsVars);
+				if (do_calc) {
+					dd = _context.applyInt(dd, f2._dd, DD.ARITH_PROD); // calc
+				}
+
+				// Prune?
+				// if (_context.PRUNE_TYPE != DD.NO_REPLACE) {
+				// _context.pruneNodes(dd);
+				// }
+
+				// Cache maintenance
+				int ref = addSaveNode(dd);
+				flushCaches(contains_factor, not_contains_factor);
+				removeSaveNode(ref);
+			}
+
+			System.out.println(_context.countExactNodes(dd) + " nodes, "
+					+ _context.getGIDs(dd).size() + " bin vars / "
+					+ new_vars.size() + " prop vars, " + MemDisplay());
+
+			// Perform any required operations on this var (i.e. restrict/sum
+			// out)
+			int cnt = getVarCount(var);
+			boolean query = false;
+			for (k = 0; k < cnt; k++) {
+				Var bvar = getVar(var, k);
+				String op = (String) operations.get(bvar);
+				System.out.print("- Performing " + bvar + "->" + op);
+				if (do_calc) {
+					if (op == SUM_OUT) {
+						dd = _context.opOut(dd, bvar._nID, DD.ARITH_SUM); // Calc
+					} else if (op == RESTRICT_TRUE) {
+						dd = _context.restrict(dd, bvar._nID, DD.RESTRICT_HIGH); // Calc
+					} else if (op == RESTRICT_FALSE) {
+						dd = _context.restrict(dd, bvar._nID, DD.RESTRICT_LOW); // Calc
+					} else if (op == QUERY) {
+						query = true;
+						query_vars.add(bvar);
+					} else {
+						System.out.println("Invalid op: " + op);
+						System.exit(1);
+					}
+				}
+
+				// Prune?
+				// if (op != QUERY && _context.PRUNE_TYPE != DD.NO_REPLACE) {
+				// _context.pruneNodes(dd);
+				// }
+
+				// Cache maintenance
+				int ref = addSaveNode(dd);
+				flushCaches(contains_factor, not_contains_factor);
+				removeSaveNode(ref);
+
+				// Screen output
+				List bin_vars = getVarsFromIDs(_context.getGIDs(dd));
+				System.out.println("..." + _context.countExactNodes(dd)
+						+ " nodes, " + bin_vars.size() + " bin vars / "
+						+ new_vars.size() + " prop vars, " + MemDisplay());
+				if (new_vars.size() > max_var_width) {
+					max_var_width = new_vars.size();
+				}
+
+				// Make sure all bin_vars in dd are among the prop vars that
+				// should
+				// be in the new factor.
+				if (do_calc) {
+					Iterator bvi = bin_vars.iterator();
+					while (bvi.hasNext()) {
+						String bvs = ((Var) bvi.next())._sName;
+						Iterator nvi = new_vars.iterator();
+						boolean found = false;
+						while (!found && nvi.hasNext()) {
+							found = (bvs.equals(nvi.next()));
+						}
+						if (!found) {
+							System.out.println("ERROR: " + bvs
+									+ " not found among prop vars!");
+							System.out.println("Bin vars: " + bin_vars);
+							System.out.println("Prop vars: " + new_vars);
+							System.exit(1);
+						}
+					}
+				}
+			}
+
+			// Make new result
+			if (!query) {
+				new_vars.remove(var); // Factor should not contain var
+			}
+
+			// Add the resulting factor back in
+			not_contains_factor.add(new Factor(dd, new_vars));
+			factors = (ArrayList) not_contains_factor.clone();
+			// System.out.println("Interm factors: " + factors);
+		}
+
+		// System.out.println("Result factors: " + factors);
+
+		// Multiply out any remaining factors
+		Object dd = ((Factor) factors.get(0))._dd;
+		for (j = 1; j < factors.size(); j++) {
+			dd = _context.applyInt(dd, ((Factor) factors.get(j))._dd,
+					DD.ARITH_PROD);
+
+			// Prune?
+			// if (_context.PRUNE_TYPE != DD.NO_REPLACE) {
+			// _context.pruneNodes(dd);
+			// }
+
+			// Cache maintenance
+			int ref = addSaveNode(dd);
+			flushCaches();
+			removeSaveNode(ref);
+		}
+
+		// If not doing calculations, just return tree width of query
+		if (!do_calc) {
+			return new Integer(max_var_width);
+		}
+
+		// Normalize the result (Need P(Q|E), have P(Q^E), compute P(Q^E)/(sum_Q
+		// P(Q^E))
+		double norm_const = 1d;
+
+		// Determine sum vars
+		Object sum_dd = dd;
+		Iterator sum_vars = query_vars.iterator();
+		while (sum_vars.hasNext()) {
+			Var bvar = (Var) sum_vars.next();
+			sum_dd = _context.opOut(sum_dd, bvar._nID, DD.ARITH_SUM);
+
+			// Cache maintenance
+			int ref1 = addSaveNode(dd);
+			int ref2 = addSaveNode(sum_dd);
+			flushCaches();
+			removeSaveNode(ref2);
+			removeSaveNode(ref1);
+		}
+		if (_context.countExactNodes(sum_dd) != 1) {
+			System.out.println("Sum did not yield a constant!\n" + sum_dd);
+			System.exit(1);
+		}
+
+		// Normalization with ranges [min, max] requires division by the
+		// opposite to maintain
+		// [min, max] property.
+		if (DD.PRUNE_TYPE == DD.REPLACE_RANGE) {
+			System.out.println("Range normalization not currently implemented");
+			System.exit(1);
+		} else {
+			double sum_dd_val = _context.getMaxValue(sum_dd);
+			// System.out.println("Sum: " + _df.format(sum_dd_val));
+			if (sum_dd_val == 0) {
+				dd = _context.getConstantNode(0d);
+			} else {
+				dd = _context.scalarMultiply(dd, 1d / sum_dd_val);
+			}
+		}
+
+		// Cache maintenance
+		int ref = addSaveNode(dd);
+		flushCaches();
+		removeSaveNode(ref);
+
+		return dd;
+	}
+
+
+	/**
+	 * Entry point for a query -- uses D-separation to identify relevant factors for VarElim
+	 **/
+	public Object query(Set query_vars, Map assign_vars) {
+
+		// Prune the assign var set based on D-separation
+		HashSet pruned_assign_vars = new HashSet();
+		Iterator i = assign_vars.entrySet().iterator();
+		while (i.hasNext()) {
+			Map.Entry me = (Map.Entry) i.next();
+			String avar = (String) me.getKey();
+
+			// Check dsep of this evidence var against all query vars
+			if (false && isDSeparated(avar, new HashSet(query_vars),
+					assign_vars.keySet())) {
+				System.out.println(avar + " d-sep from " + query_vars
+						+ ", discarding " + avar + "...");
+				continue;
+			}
+			pruned_assign_vars.add(avar);
+		}
+
+		// Build the appropriate factors
+		ArrayList factors = new ArrayList();
+		HashSet rel_vars = new HashSet();
+		MarkUpwardAll(rel_vars, query_vars);
+		MarkUpwardAll(rel_vars, pruned_assign_vars);
+		i = rel_vars.iterator();
+		while (i.hasNext()) {
+			String rvar = (String) i.next();
+			CPT cpt = (CPT) _hmVar2CPT.get(rvar);
+			if (cpt == null) {
+				System.out.println("CPT for " + rvar + ": " + cpt
+						+ " NOT FOUND... discarding");
+				continue;
+			}
+
+			ArrayList allvars = new ArrayList();
+			allvars.add(cpt._sHead);
+			allvars.addAll(cpt._alParents);
+			factors.add(new Factor(cpt._dd, allvars));
+		}
+
+		// Call the varElim algorithm and return
+		return varElim(factors, new HashSet(query_vars), assign_vars);
+	}
+
+	/**
+	 * Internal inference method - variable references are binary
+	 * 
+	 * @param factors list of type Factor (see inner class definition below)
+	 * @param query_vars (the variables being queried -- should not be eliminated)
+	 * @param assign_vars (a map of var->assignment indicating the values that all evidence variables take) 
+	 * @return a single Factor for the probabilities over the query_vars
+	 **/
+	public Object varElim(List factors, Set query_vars, Map assign_vars) {
+
 		System.out.println("\nRunning variable elimination:\n\nVariable order: " + _alPropOrder + "\n\nFactors: " + factors);
+		
+		// TODO: Fill in this method for Assignment 1, Q4.
+		//
+		// Note that you can print out most classes to see what is in them (toString() should be defined). 
+		// For testing, see README.BAYES_NET in directory src/prob and run PSHell with example scripts.
+		// Use the variable order as provided by _alPropOrder (ArrayList of String var names)
+		//
+		// Use the following methods that do exactly what their names suggest:
+		// - Factor multiplyFactors(List factors)
+		// - Factor marginalizeFactor(Factor f, String mvar)
+		// - Factor restrictFactor(Factor f, String avar, String assign)
+		// - Factor normalizeFactor(Factor f)
 		
 		return null;
 	}
 
-	public Factor multiplyFactors(ArrayList factors) {
+	/** Returns the result of multiplying the list of factors **/
+	public Factor multiplyFactors(List factors) {
 		Factor f1 = (Factor) factors.get(0);
 		Object dd = f1._dd;
 		HashSet new_vars = (HashSet) f1._hsVars.clone();
@@ -632,16 +917,43 @@ public class BN {
 		return new Factor(dd, new_vars);
 	}
 
-	public Factor marginalizeFactor(Factor f, String var) {
+	/** Returns the result of marginalizing out mvar from the factor **/
+	public Factor marginalizeFactor(Factor f, String mvar) {
 		Object dd = f._dd;
-		return null;	
+		
+		int cnt = getVarCount(mvar);
+		for (int j = 0; j < cnt; j++) {
+			Var bvar = getVar(mvar, j);
+			dd = dd = _context.opOut(dd, bvar._nID, DD.ARITH_SUM);
+		}
+		
+		HashSet new_vars = new HashSet(f._hsVars); 
+		new_vars.remove(mvar);
+		return new Factor(dd, new_vars);
 	}
 
-	public Factor restrictFactor(Factor f, String var, String value) {
+	/** Returns the result of setting avar=assign in the factor **/
+	public Factor restrictFactor(Factor f, String avar, String assign) {
 		Object dd = f._dd;
-		return null;
+		
+		// Get assignment to all underlying boolean vars (bvars) for avar=assign and restrict the DD to bvars
+		int assign_val = ((IR.Variable) _ir._network._hmVariables.get(avar))._alValues.indexOf(assign);
+		if (assign_val < 0) { // Error check
+			System.out.println("Invalid var assignment: " + avar + "=" + assign);
+			System.exit(1);
+		}
+		int cnt = getVarCount(avar);
+		for (int j = 0; j < cnt; j++) {
+			Var bvar = getVar(avar, j);
+			dd = _context.restrict(dd, bvar._nID, getBVarSetting(j, assign_val) ? DD.RESTRICT_HIGH : DD.RESTRICT_LOW);
+		}
+		
+		HashSet new_vars = new HashSet(f._hsVars); 
+		new_vars.remove(avar);
+		return new Factor(dd, new_vars);
 	}
 
+	/** Assuming all evidence instantiated, sums over all free variables and normalizes the factor by this sum **/
 	public Factor normalizeFactor(Factor f) {
 		// Normalize the result (Need P(Q|E), have P(Q^E), compute P(Q^E)/(sum_Q P(Q^E))
 
@@ -649,8 +961,14 @@ public class BN {
 		Object sum_dd = f._dd;
 		Iterator sum_vars = f._hsVars.iterator();
 		while (sum_vars.hasNext()) {
-			Var bvar = (Var) sum_vars.next();
-			sum_dd = _context.opOut(sum_dd, bvar._nID, DD.ARITH_SUM);
+			
+			String var = (String) sum_vars.next();
+			
+			int cnt = getVarCount(var);
+			for (int j = 0; j < cnt; j++) {
+				Var bvar = getVar(var, j);
+				sum_dd = _context.opOut(sum_dd, bvar._nID, DD.ARITH_SUM);
+			}
 
 			// Cache maintenance -- is this safe?
 			int ref1 = addSaveNode(f._dd);
