@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// File:     BN.java (Bayes net/decision diagram implementation)
+	// File:     BN.java (Bayes net/decision diagram implementation)
 // Author:   Scott Sanner, University of Toronto (ssanner@cs.toronto.edu)
 // Date:     9/1/2003
 // Requires: comshell package
@@ -877,7 +877,7 @@ public class BN {
 	 * @param factors list of type Factor (see inner class definition below)
 	 * @param query_vars (the variables being queried -- should not be eliminated)
 	 * @param assign_vars (a map of var->assignment indicating the values that all evidence variables take) 
-	 * @return a single Factor for the probabilities over the query_vars
+	 * @return for Factor f representing the probabilities over the query_vars, return f._dd
 	 **/
 	public Object varElim(List factors, Set query_vars, Map assign_vars) {
 
