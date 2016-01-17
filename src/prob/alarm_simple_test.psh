@@ -1,0 +1,60 @@
+echo on
+setenv DEBUG "FALSE"
+setenv BN_FILENAME "./bn/ex/Alarm_Simple.bif"
+setenv PRUNE_PREC "-1"
+setenv PRUNE_TYPE "none"
+// DD_TYPE can be TABLE, ADD, AADD
+setenv DD_TYPE "TABLE"
+timer start
+load
+timer stop
+
+// Display Bayes net DAG and print BN statistics
+viz
+print
+viz A
+print B
+print E
+print A
+print M
+print J
+
+// Query #1 -- note that we should always clear variable assignments 
+// since they persist -- set it to anything non-empty string other 
+// than "query" or "assign", in this case I chose "ignore".
+setenv B "query"
+timer start
+query
+timer stop
+setenv B "ignore"
+
+// Query #2
+setenv A "query"
+setenv E "assign:FALSE"
+setenv B "assign:FALSE"
+timer start
+query
+timer stop
+setenv A "ignore"
+setenv E "ignore"
+setenv B "ignore"
+
+// Query #3
+setenv J "query"
+setenv M "assign:TRUE"
+timer start
+query
+timer stop
+setenv J "ignore"
+setenv M "ignore"
+
+// Query #4
+setenv A "query"
+setenv J "assign:TRUE"
+timer start
+query
+timer stop
+setenv A "ignore"
+setenv J "ignore"
+
+quit
