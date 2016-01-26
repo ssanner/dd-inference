@@ -4,7 +4,7 @@ setenv BN_FILENAME "./bn/ex/Alarm_JB.bif"
 setenv PRUNE_PREC "-1"
 setenv PRUNE_TYPE "none"
 // DD_TYPE can be TABLE, ADD, AADD
-setenv DD_TYPE "TABLE"
+setenv DD_TYPE "AADD"
 timer start
 load
 timer stop

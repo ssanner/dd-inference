@@ -76,7 +76,7 @@ public class BN {
 	public static long _lTime; // For timing purposes
 	protected static Var _tempVar;
 	protected static int CALLS = 0;
-
+	
 	/* The DD type to use */
 	public static int DD_TYPE = -1;
 
@@ -827,7 +827,7 @@ public class BN {
 	/**
 	 * Entry point for a query -- uses D-separation to identify relevant factors for VarElim
 	 **/
-	public Object query(Set query_vars, Map assign_vars) {
+	public Object query(Set query_vars, Map assign_vars, String inference_type) {
 
 		// Prune the assign var set based on D-separation
 		HashSet pruned_assign_vars = new HashSet();
@@ -868,7 +868,12 @@ public class BN {
 		}
 
 		// Call the varElim algorithm and return
-		return varElim(factors, new HashSet(query_vars), assign_vars);
+		switch (inference_type.toUpperCase()) {
+			case "VAR_ELIM": return varElim(factors, new HashSet(query_vars), assign_vars);
+			case "LOOPY_BP": return loopyBP(factors, new HashSet(query_vars), assign_vars);
+			case "GIBBS":    return gibbs(factors, new HashSet(query_vars), assign_vars);
+			default: System.out.println("Unknown inference method: \"" + inference_type + "\""); return null;
+		}
 	}
 
 	/**
@@ -895,6 +900,93 @@ public class BN {
 		// - Factor restrictFactor(Factor f, String avar, String assign)
 		// - Factor normalizeFactor(Factor f)
 		
+		int max_factor_vars = -1;
+
+		// System.out.println("Start factors: " + factors);
+		// System.out.println(operations + "\n\n");
+		int i, j, k;
+		ArrayList contains_var = new ArrayList();
+		ArrayList not_contains_var = new ArrayList();
+		for (i = 0; i < _alPropOrder.size(); i++) {
+
+			// A little inefficient to use Strings, but probably
+			// nothing compared to the DD operations.
+			String var = (String) _alPropOrder.get(i);
+			if (query_vars.contains(var))
+				continue;
+
+			// Separate out factors into those containing and not
+			// containing var.
+			contains_var.clear();
+			not_contains_var.clear();
+			for (j = 0; j < factors.size(); j++) {
+				Factor f = (Factor) factors.get(j);
+				if (f._hsVars.contains(var))
+					contains_var.add(f);
+				else
+					not_contains_var.add(f);
+			}
+
+			if (contains_var.isEmpty())
+				continue;
+
+			// Multiply all factors with var -> dd
+			Factor f = multiplyFactors(contains_var);
+			max_factor_vars = Math.max(max_factor_vars, f._hsVars.size());
+			System.out.println("Joint factor: " + f);
+			System.out.println(" -> eliminating " + var);
+
+			// Perform any required operations on this var (i.e. restrict or sum out)
+			String assign = (String)assign_vars.get(var);
+			if (assign != null) 
+				f = restrictFactor(f, var, assign);
+			else
+				f = marginalizeFactor(f, var);
+
+			// Add the resulting factor back in
+			not_contains_var.add(f);
+			factors.clear();
+			factors.addAll(not_contains_var);
+			
+			flushCaches(contains_var, not_contains_var);
+			System.out.println("New factor: " + f);
+		}
+
+		System.out.println("Result factors:  " + factors);
+		System.out.println("Max factor vars: " + max_factor_vars);
+
+		// Multiply out any remaining factors
+		Factor norm_result = normalizeFactor( multiplyFactors(factors) );
+
+		// Flush caches of all computations above
+		int ref = addSaveNode(norm_result._dd);
+		flushCaches();
+		removeSaveNode(ref);
+
+		return norm_result._dd;
+	}
+
+	/**
+	 * Internal inference method - variable references are binary -- same method description as varElim
+	 * 
+	 * @param factors list of type Factor (see inner class definition below)
+	 * @param query_vars (the variables being queried -- should not be eliminated)
+	 * @param assign_vars (a map of var->assignment indicating the values that all evidence variables take) 
+	 * @return for Factor f representing the probabilities over the query_vars, return f._dd
+	 **/
+	public Object loopyBP(ArrayList factors, HashSet hashSet, Map assign_vars) {
+		return null;
+	}
+
+	/**
+	 * Internal inference method - variable references are binary -- same method description as varElim
+	 * 
+	 * @param factors list of type Factor (see inner class definition below)
+	 * @param query_vars (the variables being queried -- should not be eliminated)
+	 * @param assign_vars (a map of var->assignment indicating the values that all evidence variables take) 
+	 * @return for Factor f representing the probabilities over the query_vars, return f._dd
+	 **/
+	public Object gibbs(ArrayList factors, HashSet hashSet, Map assign_vars) {
 		return null;
 	}
 

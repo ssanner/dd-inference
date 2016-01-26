@@ -152,7 +152,7 @@ public class BNTest {
 			DD.ResetTimer();
 			System.out.println("Running query: " + query_var + " | "
 					+ assignment + " ->");
-			Object cpt = bn.query(query_var, assignment);
+			Object cpt = bn.query(query_var, assignment, "VAR_ELIM");
 			long time = DD.GetElapsedTime();
 			total_time += time;
 			System.out.println("--> Query time " + time + " ms ");

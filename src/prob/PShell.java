@@ -325,10 +325,15 @@ public class PShell {
 			 ***********************************************************/
 			else if (_ci.command.type == QUERY_BN) {
 
-				if (_ci.command.numParams() != 0) {
-					_os.println("\nNo parameters needed.");
+				if (_ci.command.numParams() > 1) {
+					_os.println("\nMust specify only one of { VAR_ELIM, LOOPY_BP, GIBBS } or none for default.");
 				} else {
 
+					String inference_type = "VAR_ELIM"; // default
+					if (_ci.command.numParams() == 1) {
+						inference_type = _ci.command.getParam(0);
+					} 
+					
 					// Parse all of the variables (query and assigned)
 					HashSet query_var = new HashSet();
 					HashMap assign_var = new HashMap();
@@ -351,7 +356,7 @@ public class PShell {
 					DD.ResetTimer();
 					// int tw = ((Integer)_bn.query(query_var, assign_var, /*
 					// do_calc */ false)).intValue();
-					Object cpt = _bn.query(query_var, assign_var);
+					Object cpt = _bn.query(query_var, assign_var, inference_type);
 					Object cptOrig = _bn.queryOrig(query_var, assign_var, /* do calc */ true);
 					// System.out.println("\nResults for query:" + query_var +
 					// ", " + assign_var);
