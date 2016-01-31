@@ -40,6 +40,7 @@ import logic.add.*;
 
 // For parsing bif files
 import prob.bn.parser.*;
+import util.Pair;
 
 /**
  * Main MDP inference class
@@ -974,10 +975,143 @@ public class BN {
 	 * @param assign_vars (a map of var->assignment indicating the values that all evidence variables take) 
 	 * @return for Factor f representing the probabilities over the query_vars, return f._dd
 	 **/
-	public Object loopyBP(ArrayList factors, HashSet hashSet, Map assign_vars) {
-		return null;
+	public Object loopyBP(ArrayList factors, HashSet query_vars, Map assign_vars) {
+
+		// We can only return singleton marginals with Loopy BP so make sure query is legal
+		if (query_vars.size() != 1) {
+			System.err.println("ERROR: Loopy BP can only answer marginal queries, cannot be applied to P(" + query_vars + " | ...)");
+			return null; 
+		}
+		String query_var = (String)query_vars.iterator().next(); // Get the single query variable
+		
+		// Just define constants locally for now
+		double DAMPING   = 0.9; 
+		double TOLERANCE = 0.0001; 
+		int MAX_ITER = 100;
+		
+		// Going to mix in some strongly typed generics (saves a lot of casting)
+		HashMap<String,ArrayList<Factor>> var2factor = new HashMap<String,ArrayList<Factor>>(); // var -> [ list of factors that contain var ]
+		HashMap<Pair<String,Factor>,Factor> q_msg = new HashMap<Pair<String,Factor>,Factor>();  // var X factor -> q_var->factor
+		HashMap<Pair<Factor,String>,Factor> r_msg = new HashMap<Pair<Factor,String>,Factor>();  // factor X var -> r_factor->var
+		
+		// Build the Map of vars to their list of *restricted* Factor's and all messages (factor <-> var)
+		for (Object fo : factors) {
+			Factor f = (Factor)fo;
+			
+			// Restrict the factor if necessary!
+			for (Object vo : f._hsVars) {
+				String var = (String)vo;
+				String assign = (String)assign_vars.get(var); // Is var in factor f restricted?
+				if (assign != null) 
+					f = restrictFactor(f, var, assign);
+			}
+			
+			// Build key data structures
+			for (Object vo : f._hsVars) {
+				String var = (String)vo;
+				
+				// Augment var2factor
+				ArrayList<Factor> flist = var2factor.get(var);
+				if (flist == null) {
+					flist = new ArrayList<Factor>();
+					var2factor.put(var, flist);
+				}
+				flist.add(f);
+				
+				// Initialize all messages to uniform (set to 1, then normalize)
+				HashSet singleton_var = new HashSet();
+				singleton_var.add(var);
+				q_msg.put(new Pair<String, Factor>(var, f), normalizeFactor( new Factor(_context.getConstantNode(1d), singleton_var)) );
+				r_msg.put(new Pair<Factor, String>(f, var), normalizeFactor( new Factor(_context.getConstantNode(1d), singleton_var)) );
+			}
+		}
+		
+		// Repeat Loopy BP until either max iterations or complete convergence (marginals do not change)
+		int iter = 1;
+		Factor answer = new Factor(_context.getConstantNode(2d), query_vars); // Not a probability so cannot be answer --> prevent erroneous convergence on first iter
+		Factor old_answer = null;
+		double max_diff = -1d;
+		do {
+			old_answer = answer;
+			answer = new Factor(_context.getConstantNode(1d), query_vars);
+			ArrayList<Factor> target_r_msgs = new ArrayList<Factor>();
+			
+			// From factor m to every variable n, store a message rm->n over variable n
+			// - Multiply factor m with product over incoming messages qn'->m from all other variables n' and marginalize over n'
+			for (Pair<Factor, String> r_key : r_msg.keySet()) { // r_key._o1 = Factor m, r_key._o2 = String var n
+				Factor rfun = r_msg.get(r_key); 
+				
+				// Key r message update computation
+				ArrayList<Factor> qmsgs = collectQMsgsWithTargetFactor(q_msg, r_key._o1, r_key._o2);
+				// TODO START
+
+				
+				Factor new_rfun = null;
+				// TODO STOP
+				
+				// Mix in new message with old
+				rfun = weightedAvgFactors(new_rfun, rfun, DAMPING /* weight of first arg */);
+				r_msg.put(r_key, rfun); // Make sure to store result!
+			}
+			
+			// From variable n to every factor m, store a message qn->m over variable n
+			// - For all factors m' that n belongs to (except for m), multiply rm'->n together and normalize 
+			for (Pair<String, Factor> q_key : q_msg.keySet()) { // q_key._o1 = String var n, q_key._o2 = Factor m
+				Factor qfun = q_msg.get(q_key);
+				
+				// Key q message update computation
+				ArrayList<Factor> rmsgs = collectRMsgsWithTargetVar(r_msg, q_key._o1, q_key._o2);
+
+				// TODO START
+				
+				
+				Factor new_qfun = null;
+				// TODO STOP
+
+				// Mix in new message with old
+				qfun = weightedAvgFactors(new_qfun, qfun, DAMPING /* weight of first arg */);
+				q_msg.put(q_key, qfun); // Make sure to store result!
+			}
+			
+			// Multiply all target r messages (r_m->n for all m with n=query_var) and normalize to get answer: P(query_var)
+			ArrayList<Factor> rmsgs_to_query_var = collectRMsgsWithTargetVar(r_msg, query_var, null /* nothing to exclude */);
+			// TODO START
+			
+			
+			answer = null;
+			// TODO STOP
+			
+			// Diagnostic printout
+			max_diff = maxDiff(answer, old_answer); // Find answer function value with maximal difference over the last two iterations
+			System.out.println("P(" + query_var + "|" + assign_vars + ") on iter #" + iter + ": [diff:" + _df.format(max_diff) + (max_diff <= TOLERANCE ? " CONVERGED!" : "") +"]\n" + answer);
+			
+		} while (iter++ < MAX_ITER && max_diff > TOLERANCE); 
+		
+		return answer._dd;
 	}
 
+	// Does what it says!
+	public ArrayList<Factor> collectQMsgsWithTargetFactor(HashMap<Pair<String,Factor>,Factor> q_msg, Factor target_m, String exclude_var) {
+		
+		ArrayList<Factor> ret_list = new ArrayList<Factor>();
+		for (Pair<String,Factor> q_key : q_msg.keySet())
+			if (q_key._o2 == target_m && !q_key._o1.equals(exclude_var))
+				ret_list.add(q_msg.get(q_key));
+		
+		return ret_list;
+	}
+
+	// Does what it says!
+	public ArrayList<Factor> collectRMsgsWithTargetVar(HashMap<Pair<Factor,String>,Factor> r_msg, String target_var, Factor exclude_factor) {
+		
+		ArrayList<Factor> ret_list = new ArrayList<Factor>();
+		for (Pair<Factor,String> r_key : r_msg.keySet())
+			if (r_key._o2.equals(target_var) && r_key._o1 != exclude_factor)
+				ret_list.add(r_msg.get(r_key));
+		
+		return ret_list;
+	}
+	
 	/**
 	 * Internal inference method - variable references are binary -- same method description as varElim
 	 * 
@@ -988,6 +1122,60 @@ public class BN {
 	 **/
 	public Object gibbs(ArrayList factors, HashSet hashSet, Map assign_vars) {
 		return null;
+	}
+
+	/** Find the maximum absolute difference between any two values of f1 and f2 **/
+	public double maxDiff(Factor factor1, Factor factor2) {
+
+		if (!factor1._hsVars.equals(factor2._hsVars)) {
+			System.out.println("ERROR: mismatched var sets, cannot combined damped factors " + factor1 + "\nAND\n" + factor2);
+			System.exit(1);
+		}
+	
+		// Compute difference of two factors
+		Factor diff1 = new Factor(_context.applyInt(factor1._dd, factor2._dd, DD.ARITH_MINUS), factor1._hsVars);
+		Factor diff2 = new Factor(_context.applyInt(factor2._dd, factor1._dd, DD.ARITH_MINUS), factor1._hsVars);
+		
+		// Max out all variables to find single max difference
+		return Math.max( findMax(diff1), findMax(diff2) );
+	}
+	 
+	/** Finds the maximum function value for the factor **/
+	public double findMax(Factor f) {
+		
+		// Max out all variables to find single max difference
+		Object dd = f._dd;
+		for (Object var : f._hsVars) {
+			String mvar = (String)var;
+			int cnt = getVarCount(mvar);
+			for (int j = 0; j < cnt; j++) {
+				Var bvar = getVar(mvar, j);
+				dd = _context.opOut(dd, bvar._nID, DD.ARITH_MAX);
+			}
+		}
+
+		// Must be down to a constant, evaluate the DD and return it
+		return _context.evaluate(dd, new ArrayList());
+	}
+	
+	/** Returns the result of multiplying the list of factors **/
+	public Factor weightedAvgFactors(Factor factor1, Factor factor2, double weight_factor1) {
+		
+		if (!factor1._hsVars.equals(factor2._hsVars)) {
+			System.out.println("ERROR: mismatched var sets, cannot combined damped factors " + factor1 + "\nAND\n" + factor2);
+			System.exit(1);
+		}
+		
+		if (weight_factor1 < 0d || weight_factor1 > 1d) {
+			System.out.println("ERROR: cannot compute weighted average without weight in [0,1]: " + weight_factor1);
+			System.exit(1);
+		}
+		
+		Object dd1 = _context.scalarMultiply(factor1._dd, weight_factor1);
+		Object dd2 = _context.scalarMultiply(factor2._dd, 1.0 - weight_factor1);
+		Object dd_result = _context.applyInt(dd1, dd2, DD.ARITH_SUM);
+		
+		return new Factor(dd_result, factor1._hsVars);
 	}
 
 	/** Returns the result of multiplying the list of factors **/
@@ -1016,7 +1204,7 @@ public class BN {
 		int cnt = getVarCount(mvar);
 		for (int j = 0; j < cnt; j++) {
 			Var bvar = getVar(mvar, j);
-			dd = dd = _context.opOut(dd, bvar._nID, DD.ARITH_SUM);
+			dd = _context.opOut(dd, bvar._nID, DD.ARITH_SUM);
 		}
 		
 		HashSet new_vars = new HashSet(f._hsVars); 
@@ -1090,8 +1278,79 @@ public class BN {
 		}
 
 		public String toString() {
-			return "Factor( " + _hsVars + "::" + _context.getGIDs(_dd) + " )";
+			
+			StringBuilder s = new StringBuilder("Factor( " + _hsVars + "::" + _context.getGIDs(_dd) + " )\n");
+			if (_hsVars.size() <= 5)
+				s.append(printProbTable());
+			else {
+				s.append("<Too many vars to print prob table, just showing variable values>\n");
+				s.append(printVarValues());
+			}
+			return s.toString();
 		}
+
+		public String printVarValues() {
+			StringBuilder sb = new StringBuilder();
+			for (Object var : _hsVars) {
+				sb.append(var + " in {");
+				ArrayList values = getValues((String)var);
+				boolean first = true;
+				for (Object val : values) {
+					sb.append((first ? " " : ", ") + val);
+					first = false;
+				}
+				sb.append(" }\n");
+			}
+			return sb.toString();
+		}
+		
+		public String printProbTable() {
+			if (DD.PRUNE_TYPE == DD.REPLACE_RANGE)
+				return "Range cpt printing not implemented";
+
+			StringBuilder sb = new StringBuilder();
+			printProbEntries(new HashMap(), new LinkedList(_hsVars), sb);
+			return sb.toString();
+		}
+
+		public void printProbEntries(HashMap query_assigned, LinkedList query_left, StringBuilder sb) {
+
+			if (query_left.isEmpty()) {
+
+				// Generate output
+				sb.append("- " + _df.format(_context.evaluate(_dd, assign2EvalSetting(query_assigned))) + ": P( ");
+				Iterator i = query_assigned.entrySet().iterator();
+				while (i.hasNext()) {
+					Map.Entry me = (Map.Entry) i.next();
+					String var = (String) me.getKey();
+					String setting = (String) me.getValue();
+					sb.append(var + "=" + setting + " ");
+				}
+				sb.append(")\n");
+				return;
+
+			} else {
+
+				// Get next var and recurse for all values
+				String var = (String) query_left.removeFirst();
+				ArrayList values = getValues(var);
+				Iterator j = values.iterator();
+				while (j.hasNext()) {
+					String val = (String) j.next();
+					query_assigned.put(var, val);
+
+					// Recurse
+					printProbEntries(query_assigned, query_left, sb);
+
+					query_assigned.remove(var);
+				}
+
+				// Now reset so that parent can recurse on other values
+				query_left.addFirst(var);
+				return;
+			}
+		}
+		
 	}
 
 	// ///////////////////////////////////////////////////////////////////////////

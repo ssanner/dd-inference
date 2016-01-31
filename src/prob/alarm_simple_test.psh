@@ -19,12 +19,14 @@ print A
 print M
 print J
 
+// Query algorithm can be: VAR_ELIM, LOOPY_BP, GIBBS
+
 // Query #1 -- note that we should always clear variable assignments 
 // since they persist -- set it to anything non-empty string other 
 // than "query" or "assign", in this case I chose "ignore".
 setenv B "query"
 timer start
-query VAR_ELIM
+query LOOPY_BP
 timer stop
 setenv B "ignore"
 
@@ -33,7 +35,7 @@ setenv A "query"
 setenv E "assign:FALSE"
 setenv B "assign:FALSE"
 timer start
-query GIBBS
+query LOOPY_BP
 timer stop
 setenv A "ignore"
 setenv E "ignore"

@@ -364,7 +364,7 @@ public class PShell {
 					// _bn._context.printNode(cpt) + "\n");
 					System.out.println("\nREFERENCE IMPLEMENTATION:");
 					printProbTable(query_var, assign_var, cptOrig);
-					System.out.println("\nASSIGNMENT 4, Q4 RESULT:");
+					System.out.println("\nQ4 RESULT:");
 					if (cpt != null)
 						printProbTable(query_var, assign_var, cpt);
 					else
