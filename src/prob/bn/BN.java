@@ -1044,9 +1044,15 @@ public class BN {
 				// Key r message update computation
 				ArrayList<Factor> qmsgs = collectQMsgsWithTargetFactor(q_msg, r_key._o1, r_key._o2);
 				// TODO START
-
-				
-				Factor new_rfun = null;
+				qmsgs.add(r_key._o1);
+				Factor new_rfun = multiplyFactors( qmsgs );
+				for (Object vo : new_rfun._hsVars) { // Marginalize over all n' != n
+					String mvar = (String)vo;
+					if (mvar.equals(r_key._o2))
+						continue;
+					new_rfun = marginalizeFactor(new_rfun, mvar);
+				}
+				new_rfun = normalizeFactor(new_rfun);
 				// TODO STOP
 				
 				// Mix in new message with old
@@ -1063,9 +1069,9 @@ public class BN {
 				ArrayList<Factor> rmsgs = collectRMsgsWithTargetVar(r_msg, q_key._o1, q_key._o2);
 
 				// TODO START
-				
-				
-				Factor new_qfun = null;
+				if (rmsgs.isEmpty()) // This is a leaf variable in only one factor which always broadcasts the same message
+					continue; // System.out.println("Only 1 factor for " + q_key._o1 + " which is " + q_key._o2);
+				Factor new_qfun = normalizeFactor( multiplyFactors( rmsgs ) );
 				// TODO STOP
 
 				// Mix in new message with old
@@ -1076,9 +1082,7 @@ public class BN {
 			// Multiply all target r messages (r_m->n for all m with n=query_var) and normalize to get answer: P(query_var)
 			ArrayList<Factor> rmsgs_to_query_var = collectRMsgsWithTargetVar(r_msg, query_var, null /* nothing to exclude */);
 			// TODO START
-			
-			
-			answer = null;
+			answer = normalizeFactor( multiplyFactors( rmsgs_to_query_var ) );
 			// TODO STOP
 			
 			// Diagnostic printout
