@@ -1,7 +1,0 @@
-variables ()
-action noreboot
-endaction
-reward (0) 
-
-discount 0.900000
-tolerance 0.010000

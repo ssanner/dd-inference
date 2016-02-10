@@ -1,0 +1,58 @@
+// Bayesian network for the standard textbook 5 variable "Alarm" Example 
+network "Simple Alarm" { //5 variables and 5 probability distributions
+}
+variable  "E" { //2 values
+	type discrete[2] {  "True"  "False" };
+	property "position = (54, 35)" ;
+}
+variable  "B" { //2 values
+	type discrete[2] {  "True"  "False" };
+	property "position = (54, 35)" ;
+}
+variable  "A" { //2 values
+	type discrete[2] {  "True"  "False" };
+	property "position = (145, 36)" ;
+}
+variable  "J" { //2 values
+	type discrete[2] {  "True"  "False" };
+	property "position = (54, 35)" ;
+}
+variable  "M" { //2 values
+	type discrete[2] {  "True"  "False" };
+	property "position = (54, 35)" ;
+}
+probability (  "E" ) { //1 variable(s) and 2 values
+	table 
+		0.1	 // p(True)
+		0.9;  // p(False);
+}
+probability (  "B" ) { //1 variable(s) and 2 values
+	table 
+		0.1	 // p(True)
+		0.9;   // p(False);
+}
+probability (  "A"  "E"  "B" ) { //3 variable(s) and 8 values
+	table 
+		 0.99    // P(A=True|E=True,B=True) 
+		 0.75    // P(A=True|E=True,B=False)  
+		 0.90    // P(A=True|E=False,B=True)  
+		 0.01    // P(A=True|E=False,B=False)  
+		 0.01    // P(A=False|E=True,B=True)  
+		 0.25    // P(A=False|E=True,B=False)  
+		 0.10    // P(A=False|E=False,B=True)  
+		 0.99;   // P(A=False|E=False,B=False) 
+}
+probability (  "M"  "A" ) { //2 variable(s) and 4 values
+	table 
+		 0.60    // P(M=True|A=True)  
+		 0.05    // P(M=True|A=False)  
+		 0.40    // P(M=False|A=True)  
+		 0.95;   // P(M=False|A=False) 
+}
+probability (  "J"  "A" ) { //2 variable(s) and 4 values
+	table 
+		 0.75    // P(J=True|A=True)  
+		 0.10    // P(J=True|A=False)  
+		 0.25    // P(J=False|A=True)  
+		 0.90;   // P(J=False|A=False) 
+}
