@@ -106,6 +106,9 @@ public class BN {
 	/* List of Var */
 	public HashMap _hmVarMap;
 
+	/* Random number generator (for sampling) */
+	public Random _random = new Random(System.currentTimeMillis() /*initial seed*/);
+	
 	/* Connectivity graph of nodes (forward links are to parents) */
 	public Graph _graph;
 
@@ -1124,10 +1127,187 @@ public class BN {
 	 * @param assign_vars (a map of var->assignment indicating the values that all evidence variables take) 
 	 * @return for Factor f representing the probabilities over the query_vars, return f._dd
 	 **/
-	public Object gibbs(ArrayList factors, HashSet hashSet, Map assign_vars) {
-		return null;
+	public Object gibbs(ArrayList factors, HashSet query_vars, Map assign_vars) {
+
+		// Just define constants locally for now
+		final int MAX_SAMPLES = 10000;
+		
+		// Some local bookkeeping data structures
+		HashMap<String, ArrayList<Factor>> var2factor = new HashMap<String, ArrayList<Factor>>(); // var -> [ list of factors that contain var ]
+		ArrayList<String> nonEvidenceVars = new ArrayList<String>(); // List of all_variables \setminus evidence_variables... we need to sample these!  
+
+		// Restrict each factor according to any evidence contained therein and populate other bookkeeping data structures
+		for (Object fo : factors) {
+			Factor f = (Factor) fo;
+			for (Object vo : f._hsVars) {
+				String var = (String) vo;
+				String assign = (String) assign_vars.get(var); // Is var in factor f restricted?
+				if (assign != null)
+					f = restrictFactor(f, var, assign);
+			}
+			// Build key data structures
+			for (Object vo : f._hsVars) {
+				String var = (String)vo;
+				if(!nonEvidenceVars.contains(var) && !assign_vars.keySet().contains(var))
+					nonEvidenceVars.add(var);
+
+				// Augment var2factor
+				ArrayList<Factor> flist = var2factor.get(var);
+				if (flist == null) {
+					flist = new ArrayList<Factor>();
+					var2factor.put(var, flist);
+				}
+				flist.add(f);
+			}
+		}
+		
+        // Cache all conditional probabilities up front so we don't need to recompute them
+		HashMap<String, Factor> var2cp = buildConditionalProbability(var2factor); // TODO METHOD: you need to complete this method
+
+        // Initialize all the non evidence vars to a random starting value
+		String[][] samples = new String[MAX_SAMPLES][nonEvidenceVars.size()];   // Just storing *pointers* to Strings, so this is efficient
+		HashMap<String, String> currAssignment = new HashMap<String, String>(); // Store { String var -> String current_value } 
+		for(String var : nonEvidenceVars){
+			currAssignment.put(var, getRandomAssignValue(var));
+		}
+		setSamplesMatrix(samples, currAssignment, 0 /*t = row*/, nonEvidenceVars);
+
+        // Main Gibbs sampling loop: fill in sample matrix for t > 0: samples[t][var index]
+		//
+		// Note 1: the index of the variable in nonEvidenceVars *is* the var index (in case you were wondering)
+		// Note 2: we could combine sampling with query evaluation, but for now we separate the two steps for clarity
+		
+		// TODO START 
+		
+		// This section only needs to call getSampleValue() and setSamplesMatrix().
+		// TODO METHOD: You need to complete getRandomSample() below in order for getSampleValue() to work correctly.
+
+
+		
+		
+		
+		
+		// TODO STOP
+		
+		// Now that we have the sample matrix, we compute prob(Q|E) as 
+		//
+		//   query_prob = 1/MAX_SAMPLES * \sum_t I[ query_assignment_t ]
+		//
+		// Note: we literally sum indicator *functions* so that the final "factor" records the frequencies of every query instantiation
+		Factor query_prob = new Factor(_context.getConstantNode(0d), new HashSet() /*empty set of variables*/); // Initialize to 0
+		for(int t = 0; t < samples.length; t++){
+			Factor indicator = getQueryIndicator(samples[t], query_vars, nonEvidenceVars);
+			// TODO SINGLE LINE: What do we do with addFactors()?  
+		}
+		// TODO SINGLE LINE: How should we normalize with scalarMultiplyFactor()?
+
+		return query_prob._dd;
 	}
 
+	/** Populate the specified row t of the samples matrix with the currAssignment **/
+    private void setSamplesMatrix(String[][] samples, HashMap<String, String> currAssignment, int t, ArrayList<String> nonEvidenceVars) {
+        for(int ind = 0; ind < nonEvidenceVars.size(); ind++){
+            samples[t][ind] = currAssignment.get(nonEvidenceVars.get(ind));
+        }
+    }
+
+    /** Randomly select one of the possible values for a variable **/
+	private String getRandomAssignValue(String var) {
+		ArrayList<String> possibleAssignments = ((ArrayList<String>) _hmVar2Values.get(var));
+		int randomInd = _random.nextInt(possibleAssignments.size());
+		return possibleAssignments.get(randomInd);
+	}
+
+	/** Evaluates the condProb for evidence (currentAssignment) to get the probability vector, then draws a sample var assignment and returns it **/
+	private String getSampleValue(String var, Factor condProb, HashMap<String, String> currentAssignment) { // Get a sample from current assignment
+		ArrayList<String> possibleAssignments = null;
+		ArrayList<Double> probs = new ArrayList<Double>();
+		int cnt = getVarCount((String) var);
+
+        //Compute a probability vector corresponding to probabilities of assigning each possible value to var
+        String initAssign = currentAssignment.get(var); // Get the current assignment for var
+		for (int j = 0; j < cnt; j++) {
+			possibleAssignments = ((IR.Variable) _ir._network._hmVariables.get(var))._alValues;
+			for(String assign : possibleAssignments) {
+				currentAssignment.put(var, assign); // Change the current assignment of var to one of it's possible values
+                double p = _context.evaluate(condProb._dd, assign2EvalSetting(currentAssignment)); // Compute probability of this assignment to vars
+                currentAssignment.put(var, initAssign); // Change the assignment back to original value
+				probs.add(p);
+			}
+		}
+
+        //Sample one of the assignments based on the probs vector
+        int index = getRandomSample(probs);
+        return possibleAssignments.get(index);
+	}
+
+	/** Given an array of probs that sum to 1, return an array index drawn according to the probabilities **/ 
+	public int getRandomSample(ArrayList<Double> probs) {
+		
+		// TODO START
+
+		// This method only needs to call _random.nextDouble()
+		int ind = -1; // -1 is an illegal index... returning this as an error value
+
+		
+		
+		
+		
+		
+        // TODO STOP
+        return ind;
+	}
+
+	/** For each String var, create a conditional probability Factor: P(var|...) **/
+	public HashMap<String, Factor> buildConditionalProbability(HashMap<String, ArrayList<Factor>> var2factor){
+		
+		// TODO START
+		
+		// In this method, you *only* need to call multiplyFactors(), marginalizeFactor(), and divideFactors().
+		// var2factor passed in is the *only* argument you need to compute the conditional probabilities.
+		HashMap<String, Factor> var2cp = new HashMap<String, Factor>();
+
+
+		
+		
+		
+		
+		
+		// TODO STOP
+		return var2cp;
+	}
+
+	/** Build an indicator function (Factor) for the current assignment of query vars **/
+	public Factor getQueryIndicator(String[] currAssignment, HashSet query_vars, ArrayList<String> nonEvidenceVars){
+		Object dd = null, ddr = null;
+        String val = "";
+
+		for(Object avar : query_vars) {
+            for(int i = 0; i < nonEvidenceVars.size(); i++){
+                if(nonEvidenceVars.get(i).equals(avar))
+                    val = currAssignment[i];
+
+            }
+			int cnt = getVarCount((String) avar);
+
+			for (int j = 0; j < cnt; j++) {
+                Var bvar = getVar((String) avar, j);
+                int assign_val = ((IR.Variable) _ir._network._hmVariables.get(avar))._alValues.indexOf(val);
+                if (getBVarSetting(j, assign_val)) {
+                    dd = _context.getVarNode(bvar._nID, 0.0d, 1.0d); // Get a new node
+                } else {
+                    dd = _context.getVarNode(bvar._nID, 1.0d, 0.0d); // Get a new node
+                }
+
+                if (ddr != null)
+                    ddr = _context.applyInt(dd, ddr, DD.ARITH_PROD);
+                else
+                    ddr = dd;
+            }
+		}
+		return new Factor(ddr, query_vars);
+	}
+	
 	/** Find the maximum absolute difference between any two values of f1 and f2 **/
 	public double maxDiff(Factor factor1, Factor factor2) {
 
@@ -1201,6 +1381,36 @@ public class BN {
 		return new Factor(dd, new_vars);
 	}
 
+	/** Returns the result of adding the list of factors **/
+	public Factor addFactors(Factor f1, Factor f2) {
+
+		HashSet new_vars = (HashSet) f1._hsVars.clone();
+		new_vars.addAll(f2._hsVars);
+		Object dd = _context.applyInt(f1._dd, f2._dd, DD.ARITH_SUM); 
+			
+		// Cache maintenance -- is this safe?
+		int ref = addSaveNode(dd);
+		flushCaches();
+		removeSaveNode(ref);
+
+		return new Factor(dd, new_vars);
+	}
+
+	/** Returns the result of adding the list of factors **/
+	public Factor divideFactors(Factor f1, Factor f2) {
+
+		HashSet new_vars = (HashSet) f1._hsVars.clone();
+		new_vars.addAll(f2._hsVars);
+		Object dd = _context.applyInt(f1._dd, f2._dd, DD.ARITH_DIV); 
+			
+		// Cache maintenance -- is this safe?
+		int ref = addSaveNode(dd);
+		flushCaches();
+		removeSaveNode(ref);
+
+		return new Factor(dd, new_vars);
+	}
+
 	/** Returns the result of marginalizing out mvar from the factor **/
 	public Factor marginalizeFactor(Factor f, String mvar) {
 		Object dd = f._dd;
@@ -1235,6 +1445,13 @@ public class BN {
 		HashSet new_vars = new HashSet(f._hsVars); 
 		new_vars.remove(avar);
 		return new Factor(dd, new_vars);
+	}
+
+	/** Simple scalar multiply **/
+	public Factor scalarMultiplyFactor(Factor f, double scalar) {
+
+		Object dd = _context.scalarMultiply(f._dd, scalar);
+		return new Factor(dd, f._hsVars);
 	}
 
 	/** Assuming all evidence instantiated, sums over all free variables and normalizes the factor by this sum **/

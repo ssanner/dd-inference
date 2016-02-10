@@ -364,11 +364,11 @@ public class PShell {
 					// _bn._context.printNode(cpt) + "\n");
 					System.out.println("\nREFERENCE IMPLEMENTATION:");
 					printProbTable(query_var, assign_var, cptOrig);
-					System.out.println("\nQ4 RESULT:");
+					System.out.println("\nYOUR INFERENCE RESULT:");
 					if (cpt != null)
 						printProbTable(query_var, assign_var, cpt);
 					else
-						System.out.println("  - null");
+						System.out.println("  - [NOT IMPLEMENTED]");
 					System.out.println("\nTime: " + DD.GetElapsedTime()
 									+ " ms, Size: "	+ _bn._context.countExactNodes(cptOrig));
 				}

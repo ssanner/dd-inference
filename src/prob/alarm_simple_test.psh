@@ -4,7 +4,7 @@ setenv BN_FILENAME "./bn/ex/Alarm_Simple.bif"
 setenv PRUNE_PREC "-1"
 setenv PRUNE_TYPE "none"
 // DD_TYPE can be TABLE, ADD, AADD
-setenv DD_TYPE "AADD"
+setenv DD_TYPE "ADD"
 timer start
 load
 timer stop
@@ -26,7 +26,7 @@ print J
 // than "query" or "assign", in this case I chose "ignore".
 setenv B "query"
 timer start
-query LOOPY_BP
+query GIBBS
 timer stop
 setenv B "ignore"
 
@@ -35,7 +35,7 @@ setenv A "query"
 setenv E "assign:FALSE"
 setenv B "assign:FALSE"
 timer start
-query LOOPY_BP
+query GIBBS
 timer stop
 setenv A "ignore"
 setenv E "ignore"
@@ -45,7 +45,7 @@ setenv B "ignore"
 setenv J "query"
 setenv M "assign:TRUE"
 timer start
-query LOOPY_BP
+query GIBBS
 timer stop
 setenv J "ignore"
 setenv M "ignore"
@@ -54,7 +54,7 @@ setenv M "ignore"
 setenv A "query"
 setenv J "assign:TRUE"
 timer start
-query LOOPY_BP
+query GIBBS
 timer stop
 setenv A "ignore"
 setenv J "ignore"
