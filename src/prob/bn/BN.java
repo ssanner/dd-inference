@@ -1165,28 +1165,30 @@ public class BN {
 		HashMap<String, Factor> var2cp = buildConditionalProbability(var2factor); // TODO METHOD: you need to complete this method
 
         // Initialize all the non evidence vars to a random starting value
-		String[][] samples = new String[MAX_SAMPLES][nonEvidenceVars.size()];   // Just storing *pointers* to Strings, so this is efficient
+		String[][] samples = new String[MAX_SAMPLES][nonEvidenceVars.size()];   // Just storing pointers to Strings, so this is efficient
 		HashMap<String, String> currAssignment = new HashMap<String, String>(); // Store { String var -> String current_value } 
 		for(String var : nonEvidenceVars){
 			currAssignment.put(var, getRandomAssignValue(var));
 		}
 		setSamplesMatrix(samples, currAssignment, 0 /*t = row*/, nonEvidenceVars);
 
-        // Main Gibbs sampling loop: fill in sample matrix for t > 0: samples[t][var index]
+        // Fill in sample matrix for t > 0: samples[t][var index]
 		//
-		// Note 1: the index of the variable in nonEvidenceVars *is* the var index (in case you were wondering)
+		// Note 1: the index of the variable in nonEvidenceVars *is* the var index
 		// Note 2: we could combine sampling with query evaluation, but for now we separate the two steps for clarity
 		
-		// TODO START 
+		// TODO START
 		
 		// This section only needs to call getSampleValue() and setSamplesMatrix().
 		// TODO METHOD: You need to complete getRandomSample() below in order for getSampleValue() to work correctly.
-
-
-		
-		
-		
-		
+		for(int t = 1; t < MAX_SAMPLES; t++){
+			for(String var : nonEvidenceVars){
+                Factor condProb = var2cp.get(var);
+                String newValue = getSampleValue(var, condProb, currAssignment);
+                currAssignment.put(var, newValue); // Get a new sample for var and update the current Assignment
+            }
+            setSamplesMatrix(samples, currAssignment, t, nonEvidenceVars);
+		}
 		// TODO STOP
 		
 		// Now that we have the sample matrix, we compute prob(Q|E) as 
@@ -1197,14 +1199,14 @@ public class BN {
 		Factor query_prob = new Factor(_context.getConstantNode(0d), new HashSet() /*empty set of variables*/); // Initialize to 0
 		for(int t = 0; t < samples.length; t++){
 			Factor indicator = getQueryIndicator(samples[t], query_vars, nonEvidenceVars);
-			// TODO SINGLE LINE: What do we do with addFactors()?  
+			query_prob = addFactors(indicator, query_prob); // TODO SINGLE LINE: What do we do with addFactors()?  
 		}
-		// TODO SINGLE LINE: How should we normalize with scalarMultiplyFactor()?
+		query_prob = scalarMultiplyFactor(query_prob, (1/(double)MAX_SAMPLES) /* TODO SINGLE LINE: How should we normalize with scalarMultiplyFactor()? */);
 
 		return query_prob._dd;
 	}
 
-	/** Populate the specified row t of the samples matrix with the currAssignment **/
+	/** Instantiate the specified row of the samples matrix with the current variable assignment **/
     private void setSamplesMatrix(String[][] samples, HashMap<String, String> currAssignment, int t, ArrayList<String> nonEvidenceVars) {
         for(int ind = 0; ind < nonEvidenceVars.size(); ind++){
             samples[t][ind] = currAssignment.get(nonEvidenceVars.get(ind));
@@ -1218,7 +1220,7 @@ public class BN {
 		return possibleAssignments.get(randomInd);
 	}
 
-	/** Evaluates the condProb for evidence (currentAssignment) to get the probability vector, then draws a sample var assignment and returns it **/
+	/** Evaluates the condProb for evidence (currentAssignment) to get the probability vector, then draws a sample from this vector **/
 	private String getSampleValue(String var, Factor condProb, HashMap<String, String> currentAssignment) { // Get a sample from current assignment
 		ArrayList<String> possibleAssignments = null;
 		ArrayList<Double> probs = new ArrayList<Double>();
@@ -1247,13 +1249,16 @@ public class BN {
 		// TODO START
 
 		// This method only needs to call _random.nextDouble()
-		int ind = -1; // -1 is an illegal index... returning this as an error value
-
-		
-		
-		
-		
-		
+		double rand = _random.nextDouble();
+		int ind = 0;
+        for(double p : probs){
+            if(rand < p)
+				break;
+			else
+				rand -= p;
+			ind++;
+		}
+        
         // TODO STOP
         return ind;
 	}
@@ -1267,12 +1272,14 @@ public class BN {
 		// var2factor passed in is the *only* argument you need to compute the conditional probabilities.
 		HashMap<String, Factor> var2cp = new HashMap<String, Factor>();
 
+		for(String cvar : var2factor.keySet()) {
+			ArrayList<Factor> factorList = var2factor.get(cvar);
+			Factor nominator = multiplyFactors(factorList);
+			Factor denominator = marginalizeFactor(nominator, cvar);
+            Factor cp = divideFactors(nominator, denominator);
+			var2cp.put(cvar, cp);
+		}
 
-		
-		
-		
-		
-		
 		// TODO STOP
 		return var2cp;
 	}

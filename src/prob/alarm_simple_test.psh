@@ -26,7 +26,7 @@ print J
 // than "query" or "assign", in this case I chose "ignore".
 setenv B "query"
 timer start
-query GIBBS
+query VAR_ELIM
 timer stop
 setenv B "ignore"
 
@@ -35,7 +35,7 @@ setenv A "query"
 setenv E "assign:FALSE"
 setenv B "assign:FALSE"
 timer start
-query GIBBS
+query LOOPY_BP
 timer stop
 setenv A "ignore"
 setenv E "ignore"
