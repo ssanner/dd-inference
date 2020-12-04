@@ -50,7 +50,8 @@ GraphViz Visualization
 
 To enable Java Graphviz visualization:
 
-- Download and install GraphViz on your system (you must use version 2.28 or earlier):
+- Download and install GraphViz on your system (you must use version 
+  GraphViz 2.28 or earlier):
  
   http://www.graphviz.org/
 
